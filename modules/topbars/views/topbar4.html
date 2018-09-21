@@ -1,0 +1,146 @@
+<div class="topbar-cover" ng-controller="TopbarController as vm">
+    <div class="topbar-wrapper container-fluid">
+        <div class="topbar-left">
+            <a class="logo-main" ng-href="/#/"><img src="/assets/img/logo_senseino.png"></a>
+            <input type="text" placeholder="Search by Location, Skills" my-enter="searchAPI()" ng-model="keyword" class="searchbar-top">
+        </div>
+        <div class="topbar-right">
+            <ul class="topbar-menu">
+                <li ng-click="jobsexpressModal()" class="menu-jobsexpress" translate="TOPBAR.Express"><img src="assets/img/jobsexpress.png"></li>
+                <li><a ng-href="/#/helps" translate="TOPBAR.HELP"></a></li>
+                <li><a ng-click="jobspostModal()" translate="TOPBAR.POST"></a></li>
+                <li><a href="/#/chat"><img src="assets/img/inbox.png"></a></li>
+                <li class="dropdown" uib-dropdown>
+                    <a class="dropdown-toggle user-header-dropdown-toggle" uib-dropdown-toggle role="button">
+                    <img ng-src="{{imgProTopbar}}" alt="{{authen.firstName}}" class="header-profile-image" />
+                    <span ng-bind=""></span> <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                    <li>
+                        <a ng-href="/#/profile" translate="TOPBAR.PROFILE"></a>
+                    </li>
+                    <li>
+                        <a ng-href="/#/setting" translate="TOPBAR.SETTING"></a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a ng-click="logout()" translate="TOPBAR.SIGNOUT"></a>
+                    </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="topbar-wrapper-sub container-fluid">
+        <div class="topbar-sub-left">
+            <ul class="topbar-menu-sub">
+                <li><a ng-href="/#/home" translate="TOPBAR.FORYOU"></a></li>
+                <li><a ng-href="/#/experts" translate="TOPBAR.EXPERT"></a></li>
+                <li><a ng-href="/#/jobs" translate="TOPBAR.JOBS"></a></li>
+                <li><a ng-href="http://www.senseino.com/show_course.php" target="_blank" translate="TOPBAR.COURSES"></a></li>
+            </ul>
+        </div>
+        <div class="topbar-sub-right">
+            <p>
+                <span translate="TOPBAR.APP_DES"></span>
+                <img src="assets/img/Icon App.png" alt="" width="32px">
+                <a href="https://itunes.apple.com/us/app/senseino/id1316376945?ls=1&mt=8" target="_blank"><img class="" src="assets/img/Appstore.png" alt=""></a>
+                <a href="https://play.google.com/store/apps/details?id=com.senseino" target="_blank"><img class="" src="assets/img/Playstore.png" alt=""></a>
+            </p>
+        </div>
+    </div>
+</div>
+<script type="text/ng-template" id="่jobsexpressModal.html" >
+    <div class="modal-header modal-regis-header" translate="MODAL.EXPRESS_TITLE">
+        <span ng-click="closeMD()">X</span>
+    </div>
+    <div class="form-group group-jobep-subtitle">
+        <p translate="MODAL.EXPRESS_TITLE-DES1"></p><p translate="MODAL.EXPRESS_TITLE-DES2"></p>
+    </div>
+    <div class="modal-body" id="modal-body">
+    <form ng-submit="submitJobExpress()" name="jobExForm" autocomplete="off">
+        <div class="row form-group">
+            <div class="col-sm-3 col-md-3 col-lg-3">
+                <label translate="MODAL.EXPRESS_WORKNAME"></label>
+            </div>
+            <div class="col-sm-9 col-md-9 col-lg-9">
+                <input ng-model="postex.name" type="text" placeholder="ชื่อโพสงาน และ รายละเอียดเบื้องต้น" class="form-control input-size-box" required>
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-sm-3 col-md-3 col-lg-3">
+                <label translate="MODAL.EXPRESS_WORKTYPE"></label>
+            </div>
+            <div class="col-sm-5 col-md-5 col-lg-5">
+                <select 
+                    ng-change="selectjob()"
+                    class="form-control input-size-box"
+                    ng-model="datajob"
+                    ng-options="data as data.name[lang] for data in jobTypes track by data._id" required>
+                    <option value="" disabled translate="MODAL.EXPRESS_TYPESELECT"></option>
+                </select>
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-4">
+                <select 
+                    class="form-control input-size-box"
+                    ng-model="datatag"
+                    ng-options="data as data.name[lang] for data in tags track by data._id" required>
+                    <option value="" disabled translate="MODAL.EXPRESS_LANGSELECT"></option>
+                </select>
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-sm-3 col-md-3 col-lg-3">
+                <label translate="MODAL.EXPRESS_PRICE"></label>
+            </div>
+            <div class="col-sm-9 col-md-9 col-lg-9">
+                <input ng-model="postex.price" class="form-control jobsex-price input-size-box" type="text" placeholder="3000" required>
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-sm-3 col-md-3 col-lg-3">
+                <label translate="MODAL.EXPRESS_JOBUNIT"></label>
+            </div>
+            <div class="col-sm-9 col-md-9 col-lg-9">
+                <div class="type-radio-jobsex" ng-init="postex.jobunit='ต่อชั่วโมง'">
+                    <input type="radio" name="optradio" ng-model="postex.jobunit" value="ต่อชั่วโมง" id="radio1"><label for="radio1" translate="MODAL.EXPRESS_JOBUNIT-H"></label>
+                    <input type="radio" name="optradio" ng-model="postex.jobunit" value="ต่อวัน" id="radio2"><label for="radio2" translate="MODAL.EXPRESS_JOBUNIT-D"></label>
+                    <input type="radio" name="optradio" ng-model="postex.jobunit" value="ต่องาน" id="radio3"><label for="radio3" translate="MODAL.EXPRESS_JOBUNIT-J"></label>
+                </div>
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-sm-3 col-md-3 col-lg-3">
+                <label translate="MODAL.EXPRESS_DES"></label>
+            </div>
+            <div class="col-sm-9 col-md-9 col-lg-9">
+                <textarea ng-model="postex.des" style="resize:none;"rows="4" cols="40" required></textarea>
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-sm-3 col-md-3 col-lg-3">
+                <label translate="MODAL.EXPRESS_TEL"></label>
+            </div>
+            <div class="col-sm-5 col-md-5 col-lg-5">
+                <input ng-model="postex.tel" ng-pattern="/^[0-9]{10,10}$/" class="form-control jobsex-tel input-size-box" type="text" placeholder="เบอร์โทร" required ng-minlength="10">
+                <label></label><span class="msg-form-err" ng-show="regisForm.$dirty && regisForm.tel.$invalid">This is a required field</span>
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-4">
+                <input ng-model="postex.line" class="form-control jobsex-line input-size-box" type="text" placeholder="Line ID">
+            </div>
+        </div>
+        <div class="row form-group">
+            <span class="msg-form-err" ng-if="err===true">{{errmsg}}</span>
+        </div>
+        <div class="row form-group">
+            <div class="col-sm-3 col-md-3 col-lg-3">
+                <label></label>
+            </div>
+            <div class="col-sm-9 col-md-9 col-lg-9">
+                <button class="btn-action-jobexpress btn" type="submit" style="width:100%;" ng-disabled="jobExForm.$invalid" translate="MODAL.EXPRESS_BTN-EXPS"><img src="/assets/img/favoriteactive.png"></button>
+            </div>
+        </div>
+    </form>
+    </div>
+</script>
+

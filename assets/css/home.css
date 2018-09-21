@@ -1,0 +1,225 @@
+.section-box{
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+.wrapper-col{
+    display: table;
+    margin: auto;
+}
+.experts-name{
+    font-weight: bold;
+    margin-top: 10px;
+    font-size: 18px;
+}
+.experts-tag{
+    color: #fff;
+    background-color: #17B89A;
+    font-size: 16px;
+    border-radius: 4px;
+    padding: 0px 10px;
+}
+.experts-rating{
+    display: inline;
+    letter-spacing: -3px
+}
+.iframe-wrapper{
+    /* border: 3px solid rgb(201, 0, 1);  */
+    overflow: hidden; 
+    margin: 15px auto; 
+}
+.home-iframe{
+    border: 0;
+    width: 100%;
+    height: 730px;
+    margin-top: -110px; 
+}
+h1.head-section-margin{
+    margin-bottom: 30px;
+    padding-left: 15px;
+}
+.head-section{
+    margin-bottom: 20px;
+}
+.head-section-jobs{
+    padding-left: 30px;
+    margin-bottom: 30px;
+}
+.float-r-jobs{
+    float: right;
+    padding-right: 30px;
+}
+.job-tumbnail-repeat-col{
+    padding-right: 0px;
+}
+.job-post-repeat-col{
+    margin-bottom: 10px;
+}
+.job-post-wrapper>div{
+    padding-left: 0px;
+    margin-bottom: 10px;
+}
+.job-post-repeat-col:nth-last-child(2) > div.job-post-wrapper {
+    /* border-bottom:none; */
+} 
+.job-post-repeat-col:nth-last-child(1) > div.job-post-wrapper {
+    /* border-bottom:none; */
+} 
+.align-grid-center:nth-child(2){
+    margin-left: 8.33333333%;
+}
+.align-grid-center:nth-child(7){
+    margin-left: 8.33333333%;
+}
+.job-post-wrapper, .job-post-wrapper:focus{
+    display: flow-root;
+    padding-left: 0px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #D5D5D5;
+    margin-bottom: 10px;
+    outline: none;
+}
+.job-price{
+   margin: 0px;
+   text-align: right
+}
+.job-unit{
+    font-size: 12px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: right;
+}
+.job-name{
+    display: inline;
+    font-size: 12px;
+}
+.jobs-tumbnail-poster{
+    display: inline;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+}
+.overlay-green{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-color: #17B89A;
+    opacity: 0.10;
+    max-height: 392px;
+}
+.overlay-red{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    background-color: #FA1B25;
+    opacity: 0.10;
+    max-height: 295px;
+}
+.see-all-wrap{
+    padding-right: 15px;
+}
+div.status-new,  div.status-prog{
+    display: inline-block;
+}
+div.status-new>span{
+    border-radius: 10px;
+    background-color: #FA1B25;
+    color: #FFF;
+    padding: 1px 8px;
+    font-size: 10px;
+}
+div.status-prog>span{
+    border-radius: 10px;
+    background-color: #00B22D;
+    color: #FFF;
+    padding: 1px 8px;
+    font-size: 10px;
+}
+.wrapper-coursebox{
+    box-shadow: 0 0 5px -1px #666;
+    margin-bottom: 15px;
+    cursor: pointer;
+}
+.wrapper-coursebox>div.coursebox-body>h1{
+    font-size: 14px;
+    font-family: 'promptmedium';
+    margin: 0px;
+}
+.wrapper-coursebox>div.coursebox-body>h2{
+    font-size: 12px;
+    margin-top: 0px;
+}
+.coursebox-body{
+    padding: 5px 8px;
+}
+.course-price{
+    color: #FA1B25;
+    font-size: 12px;
+    font-family: 'promptmedium';
+    float: left;
+}
+.course-gen{
+    font-size: 12px;
+    text-align: center;
+}
+.course-pic{
+    border-radius: 50%;
+    max-width: 32px;
+    float: right;
+}
+.testimonials-img{
+    margin-bottom: 10px;
+}
+.wrapper-customer{
+    text-align: center;
+    height: 295px;
+}
+.wrapper-customer>h1{
+    font-size: 18px;
+    color: #FA1B25;
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+.wrapper-customer>p{
+    font-size: 16px;
+    /* font-family: 'promptmedium'; */
+}
+.wrapper-customer>button{
+    margin-top: 30px;
+
+}
+.footer-wrapper>div>p{
+    margin-top: 15px;
+    margin-bottom: 25px;
+}
+
+.home-section-job-wrapper{
+    width: 100%;
+    height: unset;
+    z-index: -1;
+    background-color: #E3F6F2;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+.textcover-img-job-home{
+    left: 0;
+    position: absolute;
+    text-align: center;
+    top: 40%;
+    width: 100%;
+    padding-left: 15px;
+    margin: 0 auto;
+    color: #FFF;
+    font-family: 'promptmedium';
+    font-size: 18px;
+}
+.crop-img-banner{
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+}
+.crop-img-banner img.img-banner{
+width: 100%;
+height: auto;
+margin: -10% 0 0 0px;
+}

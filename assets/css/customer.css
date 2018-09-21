@@ -1,0 +1,115 @@
+
+.customer-wrapper-enterprise{
+    background-color: #f4f4f4;
+    text-align: center;
+    padding-top: 60px;
+    padding-bottom: 120px;
+    margin: 0 auto;
+}
+.customer-wrapper-enterprise > h1 {
+    color: #FA1B25;
+    font-size: 38px;
+    margin-bottom: 20px;
+}
+.customer-wrapper-enterprise > p {
+    font-size: 20px;
+    font-family: 'prompt';
+    margin-bottom: 50px;
+}
+.customer-wrapper-enterprise > button{
+    font-size: 20px;
+    padding: 10px 60px;   
+}
+.ctm-sec-ogservice>h2{
+    font-size: 25px;
+    margin-bottom: 30px;
+}
+.ctm-sec-ogservice>p{
+    font-size: 20px;
+    max-width: 400px;
+}
+.ctm-sec-special{
+    text-align: center;
+}
+.ctm-sec-special>h1{
+    margin-bottom: 50px;
+    font-size: 24px;
+}
+.ctm-sec-special> div > h2{
+    font-size: 20px;
+}
+.ctm-sec-special> div > p{
+    font-size: 14px;
+}
+.ctm-sec-testimonial{
+    background-color:#F4F4F4;
+    display: table;
+    padding: 30px;
+    padding-bottom: 150px;
+}
+.ctm-sec-testimonial > h1{
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 50px;
+}
+.ctm-sec-testimonial > div > p{
+    font-size: 20px;
+    height: 100px;
+}
+.ctm-sec-testimonial > div > span{
+    color: #FA1B25;
+    font-size: 18px;
+}
+.ctm-sec-testimonial > div > img{
+    margin-right: 30px;
+    border-radius: 50%;
+    max-width: 50px;
+}
+.ctm-wrap-buss-ic{
+    margin-top: -100px;
+    background-color: #fff;
+    padding: 30px;
+}
+.ctm-sec-enterprise{
+    margin-top: 30px;
+    background-color: rgba(250, 27, 37, 0.1);
+    padding: 30px;
+    text-align: center;
+}
+.ctm-sec-enterprise > h1{
+    color: #FA1B25;
+    font-size: 26px;
+    margin-bottom: 30px;
+}
+.ctm-sec-enterprise > div > span{
+    font-size: 20px;
+}
+ 
+@media screen and (min-width: 768px){
+    .img-modal-window > .modal-dialog {
+        display: block;
+        width: auto;
+        margin-left: 10%;
+    }
+}
+@media screen and (min-width: 998px){
+    .img-modal-window > .modal-dialog {
+        display: block;
+        width: auto;
+        margin-left: 10%;
+    }
+}
+ 
+@media screen and (min-width: 1200px){
+    .img-modal-window > .modal-dialog {
+        display: block;
+        width: auto;
+        margin-left: 25%;
+    }
+}
+ 
+ 
+ 
+.img-modal-window > .modal-dialog > .modal-content{
+    display: inline-block;
+}

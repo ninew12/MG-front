@@ -1,0 +1,66 @@
+<aside data-ng-include="'/modules/topbars/views/topbar2.html'"></aside>  
+<section class="margin-for-topbar-2">
+    <div class="section-box row container customer-wrapper-enterprise">
+        <div class=" row container"></div>
+        <h1 translate="CUSTOMER.TITLE"></h1>
+        <p translate="CUSTOMER.PARA1"></p>
+        <button class="btn-action btn" ng-click="scrollTo('contactme')" translate="CUSTOMER.CONTACTME"></button>
+    </div>
+    <div class="section-box container">
+        <div class="col-lg-offset-1 col-sm-5 col-md-5 col-lg-5">
+            <img src="https://via.placeholder.com/400x260">
+        </div>
+        <div class="col-sm-5 col-md-5 col-lg-5 ctm-sec-ogservice">
+            <h2 translate="CUSTOMER.SEC2-TITLE"></h2>
+            <p translate="CUSTOMER.SEC2-PARA">
+            </p>
+        </div>
+    </div>
+    <div class="section-box row container-fluid ctm-sec-special">
+        <h1 translate="CUSTOMER.SEC3-TITLE"></h1>
+        <div class="col-sm-4 col-md-4 col-lg-4 ">
+            <img src="assets/img/support.png">
+            <h2 translate="CUSTOMER.SEC3-PARA1"></h2>
+            <p translate="CUSTOMER.SEC3-PARA2"></p>
+        </div>
+        <div class="col-sm-4 col-md-4 col-lg-4 ">
+            <img src="assets/img/support.png">
+            <h2 translate="CUSTOMER.SEC4-TITLE"></h2>
+            <p translate="CUSTOMER.SEC4-PARA"></p>
+        </div>
+        <div class="col-sm-4 col-md-4 col-lg-4 ">
+            <img src="assets/img/support.png">
+            <h2 translate="CUSTOMER.SEC5-TITLE"></h2>
+            <p translate="CUSTOMER.SEC5-PARA"></p>
+        </div>
+    </div>
+    <div class="section-box row container-fluid">
+        <div class="ctm-sec-testimonial">
+            <h1 translate="CUSTOMER.SEC6-TITLE"></h1>
+            <div class="col-sm-4 col-md-4 col-lg-4">
+                <p translate="CUSTOMER.SEC6-PARA1"></p>
+                <img src="https://via.placeholder.com/100x100" alt=""><span translate="CUSTOMER.SEC6-NAME1"></span>
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-4">
+                <p translate="CUSTOMER.SEC6-PARA2"></p>
+                <img src="https://via.placeholder.com/100x100" alt=""><span translate="CUSTOMER.SEC6-NAME2"></span>
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-4">
+                <p translate="CUSTOMER.SEC6-PARA3"></p>
+                <img src="https://via.placeholder.com/100x100" alt=""><span translate="CUSTOMER.SEC6-NAME3"></span>
+            </div>
+        </div>
+        <div class="col-lg-offset-1 col-sm-10 col-md-10 col-lg-10 ctm-wrap-buss-ic">
+            <div class="col-sm-2 col-md-2 col-lg-2" ng-repeat="data in testimonials">
+                <img src="{{data.img}}" class="testimonials-img">
+            </div>
+        </div>
+    </div>
+    <div class="ctm-sec-enterprise" id="contactme">
+        <h1 translate="CUSTOMER.SEC7-TITLE"></h1>
+        <p translate="CUSTOMER.SEC7-PARA1"></p>
+        <p style="margin-bottom:30px;" translate="CUSTOMER.SEC7-PARA2"></p>
+        <div><img src="assets/img/call.png">&nbsp;&nbsp;<span>092-4460222</span>&nbsp;&nbsp;<img src="assets/img/line.png">&nbsp;&nbsp;<span>@SENSEINO</span></div>
+    </div>
+</section>
+<aside data-ng-include="'/modules/footers/views/footer.html'"></aside> 

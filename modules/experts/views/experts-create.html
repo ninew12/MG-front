@@ -1,0 +1,131 @@
+<div ng-if="loaded===true">
+<aside ng-show="!isLoggedIn" data-ng-include="'/modules/topbars/views/topbar3.html'"></aside> 
+<aside ng-show="isLoggedIn" data-ng-include="'/modules/topbars/views/topbar5.html'"></aside>
+</div>   
+<section class="margin-for-topbar-5">
+    <div class="section-box container-fluid experts-cre-sec-sup">
+        <div class="col-sm-offset-1 col-md-offset-1 col-lg-offset-1">
+                <h1 translate="EXPERT.CRE-TITLE"></h1>
+        </div>
+        
+        <!-- <button class="btn btn-action">เพิ่มประวัติ</button> -->
+    </div>
+    <div class="section-box row container-fluid help-sec-faq"> 
+        <div class="col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-2 col-lg-10 col-lg-offset-2">
+        <form ng-submit="submitexpertsCreate('errpic')" name="expertsCreate" autocomplete="off">
+                <div class="wrap-btn-cre-expt">
+                    <button id="creexpt" class="btn btn-action" type="submit" translate="EXPERT.BTN-CRE-EXPT"></button>
+                 </div>
+            <div class="form-group">
+                <div class="row form-group experts-cre-fg">
+                    <div class="col-sm-3 col-md-3 col-lg-2">
+                        <label class="experts-cre-label" translate="EXPERT.CRE-NAME"></label>
+                    </div>
+                    <div class="col-sm-5 col-md-5 col-lg-5">
+                        <input type="text" ng-model="user.exptname" placeholder="ล่าม" class="form-control input-size-box" required ng-minlength="2">
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group experts-cre-fg">
+                <div class="col-sm-3 col-md-3 col-lg-2">
+                    <label class="experts-cre-label" translate="MTR.WORKTYPE"></label>
+                </div>
+                <div class="col-sm-3 col-md-3 col-lg-2">
+                     <select 
+                        ng-change="selectjob()"
+                        class="form-control input-size-box"
+                        ng-model="datajob"
+                        ng-options="data as data.name[lang] for data in jobTypes track by data._id" required>
+                        <option value="" disabled translate="MTR.TYPESELECT"></option>
+                    </select>
+                </div>
+                <div class="col-sm-3 col-md-3 col-lg-2">
+                    <select 
+                        class="form-control input-size-box"
+                        ng-model="datatag"
+                        ng-options="data as data.name[lang] for data in tags track by data._id" required>
+                        <option value="" disabled translate="MTR.LANGSELECT"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="row form-group experts-cre-fg">
+                <div class="col-sm-3 col-md-3 col-lg-2">
+                    <label class="experts-cre-label" translate="MTR.PRICE"></label>
+                </div>
+                <div class="col-sm-5 col-md-5 col-lg-5">
+                    <input ng-model="user.price" class="form-control jobsex-price input-size-box" type="number" placeholder="3000" required>
+                </div>
+            </div>
+            <div class="row form-group experts-cre-fg">
+                <div class="col-sm-3 col-md-3 col-lg-2">
+                    <label class="experts-cre-label" translate="MTR.JOBUNIT">รูปแบบงาน</label>
+                </div>
+                <div class="col-sm-5 col-md-5 col-lg-5">
+                    <div class="type-radio-jobsex" ng-init="user.jobunit='ต่อชั่วโมง'">
+                        <input type="radio" name="optradio" ng-model="user.jobunit" value="ต่อชั่วโมง" id="radio1"><label for="radio1" translate="MTR.JOBUNIT-H"></label>
+                        <input type="radio" name="optradio" ng-model="user.jobunit" value="ต่อวัน" id="radio2"><label for="radio2" translate="MTR.JOBUNIT-D"></label>
+                        <input type="radio" name="optradio" ng-model="user.jobunit" value="ต่องาน" id="radio3"><label for="radio3" translate="MTR.JOBUNIT-J"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group experts-cre-fg">
+                    <div class="col-sm-3 col-md-3 col-lg-2">
+                        <label class="experts-cre-label" translate="MTR.DETAIL"></label>
+                    </div>
+                    <div class="col-sm-5 col-md-5 col-lg-5">
+                        <textarea ng-model="user.des" style="resize:none;" rows="10" cols="100%" required></textarea>
+                    </div>
+                </div>
+                <div class="row form-group experts-cre-fg">
+                    <div class="col-sm-3 col-md-3 col-lg-2">
+                        <label class="experts-cre-label" translate="MTR.EXP"></label>
+                    </div>
+                    <div class="col-sm-5 col-md-5 col-lg-5">
+                        <textarea ng-model="user.exp" style="resize:none;" rows="10" cols="100%" required></textarea>
+                    </div>
+                </div>
+                <div class="row form-group experts-cre-fg">
+                    <div class="col-sm-3 col-md-3 col-lg-2">
+                        <label class="experts-cre-label" translate="MTR.ED"></label>
+                    </div>
+                    <div class="col-sm-5 col-md-5 col-lg-5">
+                        <textarea ng-model="user.ed" style="resize:none;" rows="10" cols="100%" required></textarea>
+                    </div>
+                </div>
+                <div class="row form-group experts-cre-fg">
+                    <div id="errpic" class="col-sm-12 col-md-12 col-lg-12">
+                        <label class="experts-cre-label" translate="MTR.UP-Pic-VID"></label><span class="msg-form-err"ng-show="picErr" translate="MTR.ERR-Pic-VID"></span>                       
+                    </div>                    
+                    <div class="col-sm-4 col-md-4 col-lg-2 input-media-wrap">
+                        <span class="btn btn-media">
+                            <input type="file" onchange="angular.element(this).scope().uploadFile(this.files)" multiple>
+                        </span>
+                    </div>
+                    <div class="col-sm-4 col-md-4 col-lg-2 crop" ng-repeat="file in filesArray track by $index | limitTo: 5">
+                        <img class="img-pre" width="100%" ng-src="{{file}}" alt="">
+                        <a class="rm-pic-expt-cre" ng-click="removePreImg($index)"><img src="assets/img/delete.png"></a>
+                    </div>
+                </div>
+                <div class="row form-group experts-cre-fg">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <label class="experts-cre-label" translate="EXPERT.PORT"></label>                       
+                    </div>                    
+                    <div class="col-sm-4 col-md-4 col-lg-2 input-media-wrap">
+                        <span class="btn btn-media">
+                            <input type="file" onchange="angular.element(this).scope().uploadPort(this.files)" multiple>
+                        </span>
+                    </div>
+                    <div class="col-sm-4 col-md-4 col-lg-2 crop" ng-repeat="port in portMediaArray track by $index | limitTo: 5">
+                        <img class="img-pre" width="100%" ng-src="{{port}}" alt="">
+                        <a class="rm-pic-expt-cre" ng-click="removePortImg($index)"><img src="assets/img/delete.png"></a>
+                    </div>
+                </div>
+                <div class="row form-group experts-cre-fg">
+                    <span class="msg-form-err" ng-if="err===true">{{errmsg}}</span>
+                </div>
+        </form>
+        <!-- <test color1="color1" data-method="clearPreview"></test>   -->
+        </div>
+    </div>
+</section>
+<aside data-ng-include="'/modules/footers/views/footer.html'"></aside> 

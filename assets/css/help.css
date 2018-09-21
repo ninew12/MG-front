@@ -1,0 +1,42 @@
+.help-sec-sup{
+    background-color: #FA1B25;
+    text-align: center;
+    padding: 50px;
+    padding-top: 30px;
+    color: #fff;
+}
+.help-sec-sup > h1{
+    font-size: 26px;
+    margin-bottom: 50px;
+}
+.help-sec-sup >input{
+    /* width: 400px; */
+    margin: 0 auto;
+}
+.panel-default>.panel-heading {
+background-image: linear-gradient(to bottom,#ffffff 0,#ffffff 100%);
+padding: 20px;
+border: 1px solid #989898;
+}
+.panel-default{
+    box-shadow: none;
+}
+.panel-open{
+    border: 1px solid #FA1B25;
+}
+.panel-open > .panel-heading{
+    border-bottom: 1px solid #FA1B25;
+    border-left: none;
+    border-top: none;
+    border-right: none;
+}
+.panel-open > .panel-heading > .panel-title{
+    color: #FA1B25;
+}
+a.accordion-toggle, a.accordion-toggle:hover, a.accordion-toggle:focus, a.accordion-toggle:visited{
+    text-decoration: none;
+    outline: none;
+}
+.panel-open > .panel-collapse > .panel-body {
+    background-color: rgba(250, 27, 37, 0.1);
+}

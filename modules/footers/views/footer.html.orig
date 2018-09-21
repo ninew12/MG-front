@@ -1,0 +1,45 @@
+<div class="row container footer-wrapper">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12  footer-wrapper-top">
+        <div class="col-xs-4 col-sm-4  col-md-4 col-lg-4">
+            <img src="assets/img/logo_senseino.png" alt="">
+            <p>The Service PLaace for Language Experts</p>
+
+            <li class="dropdown sort-dropdown styled-dropdown" uib-dropdown>
+                <a class="dropdown-toggle" uib-dropdown-toggle role="button">
+                    <span><img src="assets/img/th.png">&nbsp;&nbsp;TH</span>
+                <b class="glyphicon glyphicon-triangle-bottom ic-dropdown"></b>
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                <li>
+                    <a ng-click=""><img src="assets/img/th.png">&nbsp;&nbsp;TH</a>
+                </li>
+                <li>
+                    <a ng-click=""><img src="assets/img/en.png">&nbsp;&nbsp;EN</a>
+                </li>
+                </ul>
+            </li>
+        </div>
+        <div class="col-xs-4 col-sm-4  col-md-4 col-lg-4">
+            <h1 class="footer-link-title">เกี่ยวกับเรา</h1>
+            <ul class="footer-link">
+                <li>เงื่อนไขการใช้บริการ</li>
+                <li>นโนบายความเป็นส่วนตัว</li>
+                <li>คำถามที่พบบ่อย</li>
+            </ul> 
+        </div>
+        <div class="col-xs-4 col-sm-4  col-md-4 col-lg-4 ">
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                <img  src="assets/img/Icon App.png" alt="">
+            </div>
+            <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 footer-right-col" >
+                <h1>Senseino Application</h1>
+                <h2>ดาวน์โหลดได้แล้ววันนี้</h2>
+            </div>
+            <div class="footer-img-right">
+                <img class="" src="assets/img/Appstore.png" alt="">
+                <img class="" src="assets/img/Playstore.png" alt="">
+            </div>
+        </div>
+    </div>
+    <div class="footer-bar">&#9400;&nbsp;2017, Senseino Co.,Ltd. All Rights Reserved.</div>
+</div>

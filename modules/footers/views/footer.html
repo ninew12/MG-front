@@ -1,0 +1,54 @@
+<!-- <div class="row container"> -->
+<!-- <div class="col-sm-12 col-md-12 col-lg-12  footer-wrapper" ng-controller="FooterController as vm"> -->
+<div class="col-sm-12 col-md-12 col-lg-12  footer-wrapper">
+    <div class="col-sm-4  col-md-4 col-lg-4">
+        <img src="assets/img/logo_senseino.png" alt="">
+        <p translate="FOOTER.TITLE"></p>
+
+        <li class="dropup sort-dropdown styled-dropdown" uib-dropdown>
+            <a class="dropdown-toggle" uib-dropdown-toggle role="button">
+                <img ng-src="{{imglang}}"  width="28px"><span translate="MTR.chlang"></span>
+            <b class="glyphicon glyphicon-triangle-top ic-dropdown"></b>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+            <li>
+                <a ng-click="chgLang('th')"><img src="assets/img/flag_th.png" width="28px">&nbsp;&nbsp;ไทย</a>
+            </li>
+            <li>
+                <a ng-click="chgLang('en')"><img src="assets/img/flag_en.png" width="28px">&nbsp;&nbsp;English</a>
+            </li>
+            <li>
+                <a ng-click="chgLang('cn')"><img src="assets/img/flag_cn.png" width="28px">&nbsp;&nbsp;中文</a>
+            </li>
+            <li>
+                <a ng-click="chgLang('jp')"><img src="assets/img/flag_jp.png" width="28px">&nbsp;&nbsp;日本語</a>
+            </li>
+            <li>
+                <a ng-click="chgLang('kr')"><img src="assets/img/flag_kr.png" width="28px">&nbsp;&nbsp;한국어</a>
+            </li>
+            </ul>
+        </li>
+    </div>
+    <div class="col-sm-4  col-md-4 col-lg-4">
+        <h1 class="col-sm-offset-2 col-md-offset-2 col-lg-offset-2 footer-link-title" translate="FOOTER.ABOUT-TITLE"></h1>
+        <ul class="col-sm-offset-2 col-md-offset-2 col-lg-offset-2 footer-link">
+            <a href="/#/term-service"><li translate="FOOTER.ABOUT-PARA1"></li></a>
+            <a href="/#/policy"><li translate="FOOTER.ABOUT-PARA2"></li></a>
+            <a href="/#/helps"><li translate="FOOTER.ABOUT-PARA3"></li></a>
+        </ul> 
+    </div>
+    <div class="col-sm-4  col-md-4 col-lg-4 ">
+        <div class="col-sm-offset-2 col-md-offset-2 col-lg-offset-2 col-sm-3 col-md-3 col-lg-3">
+            <img  src="assets/img/Icon App.png" alt="">
+        </div>
+        <div class="col-sm-7 col-md-7 col-lg-7 footer-right-col" >
+            <h1 translate="FOOTER.DW-TITLE"></h1>
+            <h2 translate="FOOTER.DW-PARA"></h2>
+        </div>
+        <div class="col-sm-offset-2 col-md-offset-2 col-lg-offset-2 col-sm-12 col-md-12 col-lg-12 footer-img-right">
+            <a href="https://itunes.apple.com/us/app/senseino/id1316376945?ls=1&mt=8" target="_blank"><img class="" src="assets/img/Appstore.png" alt=""></a>
+            <a href="https://play.google.com/store/apps/details?id=com.senseino" target="_blank"><img class="" src="assets/img/Playstore.png" alt=""></a>
+        </div>
+    </div>
+</div>
+<div class="footer-bar" translate="FOOTER.BOTTOM-BAR"></div>

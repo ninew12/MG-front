@@ -1,0 +1,252 @@
+<div ng-if="loaded===true">
+    <aside ng-show="!isLoggedIn" data-ng-include="'/modules/topbars/views/topbar3.html'"></aside> 
+    <aside ng-show="isLoggedIn" data-ng-include="'/modules/topbars/views/topbar5.html'"></aside>
+    </div>  
+    <section class="container-fluid" style="padding:0px;">
+    <div class="section-box profile-top-wrap" style="margin-top:73px;">
+        <div class="profile-crop">  
+                <img ng-src="{{user.experts[0].profileImg[0].url}}">
+        </div>
+        <h2>{{user.firstName}} {{user.lastName}}</h2>
+        <p><img style="display:inline;"src="assets/img/location.png">{{user.address || '-'}}</p>
+    </div>
+    <div class="section-box container">
+        <h1 class="head-section-margin" translate="PROFILE.TITLE"><span class="see-all-wrap float-r"><button class="btn btn-more" style="margin-top:-10px;" translate="PROFILE.BTN-POST"><img src="assets/img/jobsexpress.png"></button></span></h1>
+        <slick infinite=true slides-to-show="5" slides-to-scroll="1">
+            <div class="slick-item col-sm-5 col-md-4 col-lg-2" ng-repeat="data in user.experts">
+                <a ng-href="/#/experts-detail{{data._id}}">
+                    <div class="crop-slide-img">
+                    <img class="slide-slick" ng-src="{{data.profileImg[0].url}}">
+                    </div>
+                </a>
+                <p class="experts-name">{{data.name[lang]}}</p>
+                <span class="experts-tag">{{data.tag.name[lang]}}</span><div class="edit-post" ng-click="editPost()"><img src="assets/img/btn_edit_black.png"></div>
+            </div>
+        </slick>
+    </div>
+    <div class="section-box container">
+        <h1 class="head-section-margin" translate="PROFILE.BTN-POST"><span class="see-all-wrap float-r"><button class="btn btn-more" style="margin-top:-10px;" translate="PROFILE.BTN-POST"><img src="assets/img/jobsexpress.png"></button></span></h1>
+        <div class="col-sm-6 col-md-6 col-lg-6 job-post-repeat-col" ng-repeat="data in user.jobs" style="padding-left:0px;">
+            <div class="job-post-wrapper" ng-click="jobsModal(data)">
+                <div class="col-sm-9 col-md-9 col-lg-9">
+                    {{data.name[lang]}}&nbsp;
+                    <div  class="status-new" ng-if="data.status=='NEW'"><span>{{data.status}}</span></div>
+                    <div  class="status-prog" ng-if="data.status=='IN PROGRESS'"><span>{{data.status}}</span></div>
+                </div>
+                <div class="col-sm-3 col-md-3 col-lg-3">
+                    <p class="job-price">
+                    <span class="currency-ssn">฿</span>
+                    {{data.price}}
+                    </p>
+                    <p class="job-unit">
+                    {{data.priceType}}
+                    </p>     
+                </div>
+                <div class="col-sm-7 col-md-7 col-lg-7">
+                    <button class="btn tag-category">{{data.jobType.name[lang]}}</button>
+                    <button class="btn tag-category">{{data.tag.name[lang]}}</button>
+                </div>
+                <div class="col-sm-5 col-md-5 col-lg-5" style="text-align:right;">
+                    <p class="job-name">{{data.user.firstName}} {{data.user.lastName}}</p>
+                    <img class="jobs-tumbnail-poster" ng-src="{{data.user.imgUrl}}">  
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section-box container">
+        <h1 class="head-section-margin" translate="PROFILE.FAV"></h1>
+        <slick 
+        infinite=true 
+        slides-to-show="5" 
+        slides-to-scroll="1">
+            <div class="slick-item col-sm-5 col-md-4 col-lg-2" ng-repeat="data in user.expertFavorite">
+                <div  class="amPmCheckbox"  ng-click="favExpt(data._id)" >
+                    <input type="checkbox" class="checkboxLabel main_street_input" id="{{data._id}}" value="1" checked/>
+                    <label for="{{data._id}}"></label>
+                </div>
+                <a ng-href="/#/experts-detail{{data._id}}">
+                    <div class="crop-slide-img">
+                    <img class="slide-slick" ng-src="{{data.profileImg[0].url}}">
+                    </div>
+                    <p class="experts-name">{{data.name[lang]}}</p>
+                    <span class="experts-tag">{{data.tag.name[lang]}}</span>
+                    <div class="experts-rating" ng-if="data.rating===0">
+                        <img src="assets/img/rating.png">
+                        <img src="assets/img/rating.png">
+                        <img src="assets/img/rating.png">
+                        <img src="assets/img/rating.png">
+                        <img src="assets/img/rating.png">
+                    </div>
+                    <div class="experts-rating" ng-if="data.rating===1">
+                        <img src="assets/img/rating-active.png">
+                        <img src="assets/img/rating.png">
+                        <img src="assets/img/rating.png">
+                        <img src="assets/img/rating.png">
+                        <img src="assets/img/rating.png">
+                    </div>
+                    <div class="experts-rating" ng-if="data.rating===2">
+                        <img src="assets/img/rating-active.png">
+                        <img src="assets/img/rating-active.png">
+                        <img src="assets/img/rating.png">
+                        <img src="assets/img/rating.png">
+                        <img src="assets/img/rating.png">
+                    </div>
+                    <div class="experts-rating" ng-if="data.rating===3">
+                        <img src="assets/img/rating-active.png">
+                        <img src="assets/img/rating-active.png">
+                        <img src="assets/img/rating-active.png">
+                        <img src="assets/img/rating.png">
+                        <img src="assets/img/rating.png">
+                    </div>
+                    <div class="experts-rating" ng-if="data.rating===4">
+                        <img src="assets/img/rating-active.png">
+                        <img src="assets/img/rating-active.png">
+                        <img src="assets/img/rating-active.png">
+                        <img src="assets/img/rating-active.png">
+                        <img src="assets/img/rating.png">
+                    </div>
+                    <div class="experts-rating" ng-if="data.rating===5">
+                        <img src="assets/img/rating-active.png">
+                        <img src="assets/img/rating-active.png">
+                        <img src="assets/img/rating-active.png">
+                        <img src="assets/img/rating-active.png">
+                        <img src="assets/img/rating-active.png">
+                    </div>
+                    <p><img style="display:inline;"src="assets/img/location.png">{{data.location | getDistance}} km {{data.location.name}}</p>
+                </a>
+            </div>
+        </slick>
+    </div>
+    <script type="text/ng-template" id="reviewModal.html">
+      
+    </script>
+    <script type="text/ng-template" id="editPost.html" style="width:800px">
+        <div class="modal-header modal-regis-header" translate="EXPERT.CRE-TITLE">
+            <span ng-click="closeMD()">X</span>
+        </div>
+        <div class="modal-body profile-modal-edit" id="modal-body">
+        <form ng-submit="submitEditPost()" name="jobExForm" autocomplete="off">
+            <div class="row form-group">
+                <div class="col-sm-3 col-md-3 col-lg-3">
+                    <label translate="EXPERT.CRE-NAME"></label>
+                </div>
+                <div class="col-sm-9 col-md-9 col-lg-9">
+                    <input ng-model="expt.name[lang]" type="text" placeholder="ชื่อโพสงาน และ รายละเอียดเบื้องต้น" class="form-control input-size-box" required>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-3 col-md-3 col-lg-3">
+                    <label translate="EXPERT.TYPE-TITLE"></label>
+                </div>
+                <div class="col-sm-5 col-md-5 col-lg-5">
+                    <select 
+                        ng-change="selectjob()"
+                        class="form-control input-size-box"
+                        ng-model="expt.jobType"
+                        ng-options="data as data.name[lang] for data in jobTypes track by data._id" required>
+                        <option value="" disabled translate="MODAL.EXPRESS_TYPESELECT"></option>
+                    </select>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4">
+                    <select 
+                        class="form-control input-size-box"
+                        ng-model="expt.tag"
+                        ng-options="data as data.name[lang] for data in tags track by data._id" required>
+                        <option value="" disabled translate="MODAL.EXPRESS_LANGSELECT"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-3 col-md-3 col-lg-3">
+                    <label translate="MODAL.EXPRESS_PRICE"></label>
+                </div>
+                <div class="col-sm-9 col-md-9 col-lg-9">
+                    <input ng-model="expt.price" class="form-control jobsex-price input-size-box" type="text" placeholder="3000" required>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-3 col-md-3 col-lg-3">
+                    <label translate="MODAL.EXPRESS_JOBUNIT"></label>
+                </div>
+                <div class="col-sm-9 col-md-9 col-lg-9">
+                    <div class="type-radio-jobsex" >
+                        <input type="radio" name="optradio" ng-model="expt.priceType" value="hour" id="radio1"><label for="radio1" translate="MODAL.EXPRESS_JOBUNIT-H"></label>
+                        <input type="radio" name="optradio" ng-model="expt.priceType" value="daily" id="radio2"><label for="radio2" translate="MODAL.EXPRESS_JOBUNIT-D"></label>
+                        <input type="radio" name="optradio" ng-model="expt.priceType" value="job" id="radio3"><label for="radio3" translate="MODAL.EXPRESS_JOBUNIT-J"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-3 col-md-3 col-lg-3">
+                    <label>ตำแหน่งที่อยู่</label>
+                </div>
+                <div class="col-sm-9 col-md-9 col-lg-9">
+                    <input ng-model="expt.location.name" class="form-control jobsex-price input-size-box" type="text" placeholder="Bangkok" required>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-3 col-md-3 col-lg-3">
+                    <label translate="MODAL.EXPRESS_DES"></label>
+                </div>
+                <div class="col-sm-9 col-md-9 col-lg-9">
+                    <textarea ng-model="expt.detail[lang]" style="resize:none;"rows="4" cols="75" required></textarea>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-3 col-md-3 col-lg-3">
+                    <label translate="MTR.EXP"></label>
+                </div>
+                <div class="col-sm-9 col-md-9 col-lg-9">
+                    <textarea ng-model="expt.experience[lang]" style="resize:none;"rows="4" cols="75" required></textarea>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-3 col-md-3 col-lg-3">
+                    <label translate="MTR.ED"></label>
+                </div>
+                <div class="col-sm-9 col-md-9 col-lg-9">
+                    <textarea ng-model="expt.education[lang]" style="resize:none;"rows="4" cols="75" required></textarea>
+                </div>
+            </div>
+            <div class="row form-group experts-cre-fg">
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <label class="experts-cre-label" translate="MTR.UP-Pic-VID"><span id="errpic" class="msg-form-err"ng-show="picErr" translate="MTR.ERR-Pic-VID"></span></label>                       
+                </div>                    
+                <div class="col-sm-4 col-md-4 col-lg-4">
+                    <span class="btn btn-media">
+                        <input type="file" onchange="angular.element(this).scope().uploadFile(this.files)" multiple>
+                    </span>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4 post-crop" ng-repeat="file in filesArray track by $index | limitTo: 5">
+                    <img class="post-img-pre" width="100%" ng-src="{{file}}" alt="">
+                    <a class="rm-pic-expt-cre" ng-click="removePreImg($index)"><img src="assets/img/delete.png"></a>
+                </div>
+            </div>
+            <div class="row form-group experts-cre-fg">
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <label class="experts-cre-label" translate="EXPERT.PORT"></label>                       
+                </div>                    
+                <div class="col-sm-4 col-md-4 col-lg-4">
+                    <span class="btn btn-media">
+                        <input type="file" onchange="angular.element(this).scope().uploadPort(this.files)" multiple>
+                    </span>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4 post-crop" ng-repeat="port in portMediaArray track by $index | limitTo: 5">
+                    <img class="post-img-pre" width="100%" ng-src="{{port}}" alt="">
+                    <a class="rm-pic-expt-cre" ng-click="removePortImg($index)"><img src="assets/img/delete.png"></a>
+                </div>
+            </div>
+            <div class="row form-group experts-cre-fg">
+                <span class="msg-form-err" ng-if="err===true">{{errmsg}}</span>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-offset-2 col-md-offset-2 col-lg-offset-2 col-sm-8 col-md-8 col-lg-8">
+                    <button class="btn-action-jobexpress btn" type="submit" style="width:100%;">แก้ไขประวัติ</button>
+                </div>
+            </div>
+        </form>
+        </div>
+    </script>
+    
+    
+    </section>

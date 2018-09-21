@@ -1,0 +1,101 @@
+<div class="topbar-cover" ng-controller="TopbarController as vm">
+    <div class="topbar-wrapper container-fluid">
+        <div class="topbar-left">
+            <a class="logo-main" ng-href="/#/"><img src="/assets/img/logo_senseino.png"></a>
+            <input type="text" placeholder="Search by Location, Skills" my-enter="searchAPI()" ng-model="keyword" class="searchbar-top">
+        </div>
+        <div class="topbar-right">
+            <ul class="topbar-menu">
+                <li><a ng-href="/#/customers" translate="TOPBAR.ORG"></a></li>
+                <li><a ng-href="/#/helps" translate="TOPBAR.HELP"></a></li>
+                <li ng-click="loginModal()" translate="TOPBAR.SIGNIN"></li>
+                <li><button class="btn btn-action" ng-click="regis()" translate="TOPBAR.REGIS"></button></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<script type="text/ng-template" id="regisModal.html">
+    <div class="modal-header modal-regis-header" translate="MODAL.REGIS_TITLE">
+        <span ng-click="closeMD()">X</span>
+    </div>
+    <div class="modal-body modal-regis-body" id="modal-body">
+        <button ng-click="FBbtnRegis()" class="btn btn-regis-face" translate="MODAL.REGIS_BTNFB"><img src=""></button>
+        <a href="https://senseino.co:3000/api/v1/auth/line"
+        class="btn btn-regis-line" translate="MODAL.REGIS_BTNLINE"><img src=""></a>
+        <p translate="MODAL.REGIS_OR"></p>
+        <button class="btn btn-regis-email" ng-click="regisEmail()" translate="MODAL.REGIS_ฺBTNEMAIL"><img src=""></button>
+        <div class="form-group form-g-login-modal" ng-if="loginerr===true">
+            <span class="msg-form-err" >{{errmsg}}</span>
+        </div> 
+        <p translate="MODAL.REGIS_ฺACCASK"><a ng-click="loginModal()" class="regis-login-btn" translate="MODAL.REGIS_ฺBTNLOGIN"></a></p>
+    </div>
+</script>
+<script type="text/ng-template" id="regisEmailModal.html">
+    <div class="modal-header modal-regis-header" translate="MODAL.REGIS_TITLE">
+        <span ng-click="closeMD()">X</span>
+    </div>
+    <div class="modal-body modal-regis-body" id="modal-body">
+<form ng-submit="submitEmailRegis()" name="regisForm" autocomplete="off">
+    <div class="form-group form-g-regis-modal">
+        <label translate="MODAL.REGIS_LB-NAME"></label>
+        <input type="text" ng-model="user.firstname" ng-pattern="/^[a-zA-Z\s]*$/" name="firstname" class="form-control" placeholder="ชื่อ" required ng-minlength="2"/>
+        <label></label><span class="msg-form-err" ng-show="regisForm.$dirty && regisForm.firstname.$invalid">This is a required field </span>
+    </div>
+    <div class="form-group form-g-regis-modal">
+        <label translate="MODAL.REGIS_LB-SIRNAME"></label>
+        <input type="text" ng-model="user.lastname" ng-pattern="/^[a-zA-Z\s]*$/"  name="lastname" class="form-control" placeholder="นามสกุล" required ng-minlength="2"/>
+        <label></label><span class="msg-form-err" ng-show="regisForm.$dirty && regisForm.lastname.$invalid">This is a required field</span>
+    </div>
+    <div class="form-group form-g-regis-modal">
+        <label translate="MODAL.REGIS_LB-TEL"></label>
+        <input type="text" ng-model="user.tel" ng-pattern="/^[0-9]{10,10}$/"  name="tel" class="form-control" placeholder="089-999-9999" required ng-minlength="10"/>
+        <label></label><span class="msg-form-err" ng-show="regisForm.$dirty && regisForm.tel.$invalid">This is a required field</span>
+    </div>
+    <div class="form-group form-g-regis-modal">
+        <label translate="MODAL.REGIS_LB-EMAIL"></label>
+        <input type="email" ng-model="user.email" name="email" class="form-control" placeholder="name@gmail.com" required ng-minlength="10"/>
+        <label></label><span class="msg-form-err" ng-show="regisForm.$dirty && regisForm.email.$error.required">This is a required field</span>
+    </div>
+    <div class="form-group form-g-regis-modal">
+        <label translate="MODAL.REGIS_LB-PASS"></label>
+        <input type="password" ng-model="user.password" ng-pattern="/^(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{4,20})$/" name="password" class="form-control" placeholder="รหัสผ่าน" required ng-minlength="4 " maxlength="10"/>
+        <label></label><span class="msg-form-err" ng-show="regisForm.$dirty && regisForm.password.$error.required">This is a required field</span>
+        <label></label><span class="msg-form-err" ng-show="regisForm.$dirty && regisForm.password.$invalid">This field is invalid </span><br/><br/>
+        <span class="msg-form-err" ng-if="err===true">{{errmsg}}</span>
+    </div>     
+    <button class="btn btn-action" type="submit" ng-disabled="myForm.$invalid" translate="MODAL.REGIS_BTNREGIS"></button>
+</form>
+</div>
+</script>
+<script type="text/ng-template" id="loginModal.html">
+    <div class="modal-header modal-regis-header" translate="MODAL.LOGIN_TITLE">
+        <span ng-click="closeMD()">X</span>
+    </div>
+    <div class="modal-body modal-regis-body" id="modal-body">
+    <form ng-submit="submitEmailLogin()" name="loginForm" autocomplete="off" style="margin-bottom:20px;">
+        <div class="form-group form-g-login-modal">
+            <input type="text" ng-model="login.username" placeholder="อีเมล" class="form-control login-ip-email" required>
+        </div>
+        <div class="form-group form-g-login-modal">
+            <input type="password" ng-model="login.password" placeholder="รหัสผ่าน" class="form-control" required>
+            <a class="login-ip-fogetpass" href="" translate="MODAL.LOGIN_FORGOTPASS"></a>
+        </div> 
+        <div class="form-group form-g-login-modal" ng-if="loginerr===true">
+            <span class="msg-form-err" >{{loginerrmsg}}</span>
+        </div> 
+        <button class="btn btn-action-login" type="submit" translate="MODAL.LOGIN_BTNLOGIN"></button>
+    </form>
+    <div class="form-group form-g-login-modal">
+    <p class="line-behide"><span translate="MODAL.LOGIN_ASKLOGIN"></span></p>
+    <div class="login-modal-opt">
+        <div class="col-sm-6 col-md-6 col-lg-6">
+            <a href="https://senseino.co:3000/api/v1/auth/line" class=""><img src="assets/img/btn_line.png"></a>
+        </div>
+        <div class="col-sm-6 col-md-6 col-lg-6">
+            <a style="cursor:pointer;" ng-click="FBbtnLogin()" class=""><img src="assets/img/btn_fb.png"></a>
+        </div>
+    </div>
+    <p  style="display:inline-block;"  translate="MODAL.LOGIN_ASKREGIS"></p><span class="login-modal-linkregis" ng-click="regis()" translate="MODAL.LOGIN_BTNREGIS"></span>
+    </div>
+    </div>
+</script>

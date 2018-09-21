@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Senseino | The Experts Services</title>
+    <link rel="shortcut icon" href="assets/img/Icon App.png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  	<meta name="description" content="Senseino">
+    <meta name="author" content="Senseino">
+    <!-- <base href="/"> -->
+    <!-- Node Modules -->
+    <link rel="stylesheet" href="node_modules/angular-ui-bootstrap/dist/ui-bootstrap-csp.css">
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="node_modules/angular-material/angular-material.min.css">
+    <link rel="stylesheet" href="node_modules/angular-jk-carousel/dist/jk-carousel.min.css">
+    <link rel="stylesheet" href="node_modules/angular-ui-bootstrap/dist/ui-bootstrap-csp.css">
+    <link rel="stylesheet" href="node_modules/slick-carousel/slick/slick.css">
+    <!-- <link rel="stylesheet" href="node_modules/slick-carousel/slick/slick-theme.css">  -->
+    <!-- Self Style -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/topbar.css">
+    <link rel="stylesheet" href="assets/css/footer.css">
+    <link rel="stylesheet" href="assets/css/home.css">
+    <link rel="stylesheet" href="assets/css/experts.css">
+    <link rel="stylesheet" href="assets/css/job.css">
+    <link rel="stylesheet" href="assets/css/customer.css">
+    <link rel="stylesheet" href="assets/css/help.css">
+    <link rel="stylesheet" href="assets/css/search.css">
+    <link rel="stylesheet" href="assets/css/chat.css">
+    <link rel="stylesheet" href="assets/css/slick-theme.css">
+    <link rel="stylesheet" href="assets/css/profile.css">
+</head>
+<body ng-app="myApp">
+    <div class="show-mobile">
+        <div class="mobile-top"></div>
+        <center>
+            <div style="margin-top:40%;">
+                <img style="margin-top:30px;" src="/assets/img/logo_senseino.png">
+                <h1 translate="TOPBAR.APP_DES"></h1>
+                <div style="margin-bottom:30px;">
+                    <a href="https://itunes.apple.com/us/app/senseino/id1316376945?ls=1&amp;mt=8" target="_blank"><img class="" src="assets/img/Appstore.png" alt=""></a>
+                    <a href="https://play.google.com/store/apps/details?id=com.senseino" target="_blank"><img class="" src="assets/img/Playstore.png" alt=""></a>
+                </div>
+            </div>
+        </center>
+        <div style="position:absolute;bottom:0;" class="mobile-top"></div>
+    </div>
+    <!-- <aside data-ng-include="'/modules/topbars/views/topbar.html'"></aside>     -->
+    <section class="warpper-ngview show-web">
+            <ng-view></ng-view>
+            <!-- <aside data-ng-include="'/modules/footers/views/footer.html'"></aside>  -->
+    </section>
+    
+</body>
+<!-- Third Party -->
+<script src="https://connect.facebook.net/en_US/all.js"></script>
+<script src="https://cdn.omise.co/omise.js"></script>
+<!-- Node Modules -->
+<script src="node_modules/jquery/dist/jquery.min.js"></script>
+<script src="node_modules/angular/angular.min.js"></script>
+<script src="node_modules/angular-route/angular-route.min.js"></script>
+<script src="node_modules/angular-ui-bootstrap/dist/ui-bootstrap.js"></script>
+<script src="node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
+<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="node_modules/angular-animate/angular-animate.min.js"></script>
+<script src="node_modules/angular-aria/angular-aria.min.js"></script>
+<script src="node_modules/angular-material/angular-material.min.js"></script>
+<script src="node_modules/angucomplete-alt/dist/angucomplete-alt.min.js"></script>
+<script src="node_modules/slick-carousel/slick/slick.min.js"></script>
+
+<script src="node_modules/socket.io-client/dist/socket.io.js"></script>
+<script src="node_modules/angular-translate/dist/angular-translate.js"></script>
+<script src="node_modules/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
+<script src="node_modules/angular-cookies/angular-cookies.min.js"></script>
+<script src="node_modules/angular-translate-storage-cookie/angular-translate-storage-cookie.min.js"></script>
+<script src="node_modules/angular-translate-storage-local/angular-translate-storage-local.min.js"></script>
+<!-- <script src="node_modules/angular-slick-carousel/dist/angular-slick.min.js"></script> -->
+
+<!-- Self Scripts -->
+<script src="app.js"></script>
+<script src="modules/homes/controller/jk-carousel.js"></script>
+<script src="app.routes.js"></script>
+<script src="app.config.js"></script>
+<script src="app.core.js"></script>
+<script src="app.services.js"></script>
+<script src="auth/auth.controller.js"></script>
+<!-- CONTROLLERS -->
+<script src="modules/topbars/controller/topbar.js"></script>
+<script src="modules/homes/controller/home.js"></script>
+<script src="modules/experts/controller/experts.js"></script>
+<script src="modules/experts/controller/experts-create.js"></script>
+<script src="modules/experts/controller/experts-detail.js"></script>
+<script src="modules/experts/controller/experts-criteria.js"></script>
+<script src="modules/experts/controller/experts-jobtype.js"></script>
+<script src="modules/jobs/controller/jobs.js"></script>
+<script src="modules/customers/controller/customer.js"></script>
+<script src="modules/helps/controller/help.js"></script>
+<script src="modules/search/controller/search.js"></script>
+<script src="modules/chats/controller/chat.js"></script>
+<script src="modules/homes/controller/angular-slick-codepen.js"></script>
+<script src="modules/topbars/controller/line.js"></script>
+<script src="modules/profiles/controller/profile.js"></script>
+<script src="modules/profiles/controller/setting.js"></script>
+<script src="modules/footers/controller/footer.js"></script>
+</html>

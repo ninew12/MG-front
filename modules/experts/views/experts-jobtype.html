@@ -1,0 +1,73 @@
+<div ng-if="loaded===true">
+<aside ng-show="!isLoggedIn" data-ng-include="'/modules/topbars/views/topbar.html'"></aside> 
+<aside ng-show="isLoggedIn" data-ng-include="'/modules/topbars/views/topbar4.html'"></aside>
+</div>   
+<section class="margin-for-topbar-main">
+    <div class="section-box container-fluid">
+        <div class="col-lg-12">
+            <div class="section-box">
+                <a ng-click="tagfil('all')" id="all"><span class="exptjob-tag tag-active" translate="MTR.SEEALL"></span></a>
+                <a ng-repeat="tag in tagArr" id="{{tag._id}}" ng-click="tagfil(tag._id)"><span class="exptjob-tag">{{tag.name[lang]}}</span></a>
+            </div>
+            <h1 class="head-section-margin">{{ex.jobType.name[lang]}}</h1>
+            <div class="col-sm-5ths col-md-5ths col-lg-5ths" ng-repeat="data in experts">
+                <div class="amPmCheckbox">
+                    <input type="checkbox" class="checkboxLabel main_street_input" id="{{data._id}}" value="1" />
+                    <label for="{{data._id}}"></label>
+                </div>
+                <a ng-href="/#/experts-detail{{data._id}}">
+                <div class="crop-slide-img">
+                    <img class="slide-slick" ng-src="{{data.profileImg[0].url}}">
+                </div>
+                <p class="experts-name">{{data.name[lang]}}</p>
+                <span class="experts-tag">{{data.tag.name[lang]}}</span>
+                <div class="experts-rating" ng-if="data.rating===0">
+                    <img src="assets/img/rating.png">
+                    <img src="assets/img/rating.png">
+                    <img src="assets/img/rating.png">
+                    <img src="assets/img/rating.png">
+                    <img src="assets/img/rating.png">
+                </div>
+                <div class="experts-rating" ng-if="data.rating===1">
+                    <img src="assets/img/rating-active.png">
+                    <img src="assets/img/rating.png">
+                    <img src="assets/img/rating.png">
+                    <img src="assets/img/rating.png">
+                    <img src="assets/img/rating.png">
+                </div>
+                <div class="experts-rating" ng-if="data.rating===2">
+                    <img src="assets/img/rating-active.png">
+                    <img src="assets/img/rating-active.png">
+                    <img src="assets/img/rating.png">
+                    <img src="assets/img/rating.png">
+                    <img src="assets/img/rating.png">
+                </div>
+                <div class="experts-rating" ng-if="data.rating===3">
+                    <img src="assets/img/rating-active.png">
+                    <img src="assets/img/rating-active.png">
+                    <img src="assets/img/rating-active.png">
+                    <img src="assets/img/rating.png">
+                    <img src="assets/img/rating.png">
+                </div>
+                <div class="experts-rating" ng-if="data.rating===4">
+                    <img src="assets/img/rating-active.png">
+                    <img src="assets/img/rating-active.png">
+                    <img src="assets/img/rating-active.png">
+                    <img src="assets/img/rating-active.png">
+                    <img src="assets/img/rating.png">
+                </div>
+                <div class="experts-rating" ng-if="data.rating===5">
+                    <img src="assets/img/rating-active.png">
+                    <img src="assets/img/rating-active.png">
+                    <img src="assets/img/rating-active.png">
+                    <img src="assets/img/rating-active.png">
+                    <img src="assets/img/rating-active.png">
+                </div>
+                <p><img src="assets/img/location.png">{{data.location | getDistance}} km {{data.location.name}}</p>
+                </a>
+            </div>
+        </div>
+    </div>
+
+</section>
+<aside data-ng-include="'/modules/footers/views/footer.html'"></aside> 

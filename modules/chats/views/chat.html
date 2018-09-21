@@ -1,0 +1,630 @@
+<aside data-ng-include="'/modules/topbars/views/topbar6.html'"></aside>  
+ 
+<section class="chat-section">
+     
+   <div class="chat-all-warpper">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 chat-head-wrapper">
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 chat-head-left">
+            <h3 translate="CHAT.TITLE"></h3>
+        </div>
+        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 chat-head-msg">
+            <h3>
+                <img ng-if="imgTop"style="border-radius:50%;"width="38px" height="38px" ng-src="{{exPic}}" draggable="false">
+                {{roomName}}
+            </h3>
+            <div ng-show="roomnotfound" translate="CHAT.NEVERCHAT"></div>
+            <!-- <h4>#ABCDE</h4> -->
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 chat-wrapper-body">
+        <div class="left-msg-warp col-xs-4 col-sm-4 col-md-4 col-lg-4" scrollroom>
+            <div ng-if="isReachBottom">
+                <center>
+                    <img width="32px"src="assets/img/ajax-loader.gif">
+                </center>
+            </div>
+            <div ng-show="roomnotfound" translate="CHAT.NOMSG"></div>
+            <div ng-click="entryRoom(room)" ng-class="{readmsg: room.isReaded===true}" class="one-msg-user" ng-repeat="room in chatRoom  track by $index">
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 chat-user-thumnail-left">
+                    <img ng-if="checkRole[$index]==='expert'" width="48px" height="48px" ng-src="{{room[checkRole[$index]].thumbImgUrl}}">
+                    <!-- <img width="48px" height="48px" ng-src="{{room[checkRole[$index]].imgUrl}}"> -->
+                    <img ng-if="checkRole[$index]==='employer'" width="48px" height="48px" ng-src="{{room[checkRole[$index]].imgUrl}}">
+                    <img ng-if="checkRole[$index]==='expertUser'" width="48px" height="48px" ng-src="{{room[checkRole[$index]].thumbImgUrl}}">
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding-left:0px;">
+                    <!-- <h2 ng-if="checkRole[$index]==='expert'">{{room.expertUser.firstName}} {{room.expertUser.lastName}}</h2> -->
+                    <h2 ng-class="{readnamechat: room.isReaded===true}" ng-if="checkRole[$index]==='employer'" class="namechat">{{room[checkRole[$index]].firstName}} {{room[checkRole[$index]].lastName}}</h2>
+                    <h2 ng-class="{readnamechat: room.isReaded===true}" ng-if="checkRole[$index]==='expert'" class="namechat">{{room[checkRole[$index]].name[lang]}}</h2>
+                    <h2 ng-class="{readnamechat: room.isReaded===true}" ng-if="checkRole[$index]==='expertUser'" class="namechat">{{room[checkRole[$index]].firstName}} {{room[checkRole[$index]].lastName}}</h2>
+                     
+                    <!-- <h2 ng-if="checkRole[$index]==='employer'">{{room[checkRole[$index]].firstName}} {{room[checkRole[$index]].lastName}}</h2> -->
+                    <p ng-class="{readlastmsg: room.isReaded===true}" class="lastmsg-leftchat">{{room.lastMsg}}</p>
+                </div>
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                    <!-- <h2>#ABCDE</h2> -->
+                    <p style="margin-top:25%;" ng-if="room.state=== 1"><span class="btn state-ask" translate="CHAT.ST-ASK"></span></p>
+                    <p style="margin-top:25%;" ng-if="room.state=== 2"><span class="btn state-express" translate="CHAT.ST-WAIT"></span></p>
+                    <p style="margin-top:25%;" ng-if="room.state=== 3"><span class="btn state-work" translate="CHAT.ST-WORK"></span></p>
+                    <p style="margin-top:25%;" ng-if="room.state=== 4"><span class="btn state-ask" translate="CHAT.ST-REVIEW"></span></p>
+                    <p style="margin-top:25%;" ng-if="room.state=== 5"><span class="btn state-work" translate="CHAT.ST-SUCCESS"></span></p>
+                    <p style="margin-top:25%;" ng-if="room.state=== 0"><span class="btn state-express" translate="CHAT.ST-JEXPRESS"></span></p>
+                </div>
+            </div>
+        </div>
+        <div id="chatScroll" class="col-xs-5 col-sm-5 col-md-5 col-lg-5 chat-msg-body" scroll>
+            <div ng-if="isReachtop">
+                <center>
+                    <img width="32px"src="assets/img/ajax-loader.gif">
+                </center>
+            </div>
+            <ol class="chat" >
+                <div ng-repeat="msg in chatMsg">
+                    <li ng-if="msg.user._id != userId" class="other">
+                        <div class="avatar">
+                            <img ng-if="msg.action == 'system'" ng-src="assets/img/Icon App.png" draggable="false">
+                            <img ng-if="msg.action == 'review'" ng-src="assets/img/Icon App.png" draggable="false">
+                            <img ng-if="msg.action != 'system' && msg.action != 'review'" ng-src="{{exPic}}" draggable="false">
+                        </div>
+                        <div ng-if="msg.action==='system'" class="msgsys">
+                            <p ng-if="msg.type==='message'">{{msg.message}}</p>
+                            <img ng-if="msg.type==='image'" ng-src="{{msg.message}}">
+                        </div>
+                        <div ng-if="msg.action==='quotation'" class="msg">
+                            <p ng-if="msg.type==='message'">{{msg.message}}
+                                <button style="display:block;" class="btn btn-action" ng-click="viewOfferPrice(roomDataG)" translate="CHAT.V-Offer"></button>
+                            </p>
+                            <img ng-if="msg.type==='image'" ng-src="{{msg.message}}">
+                        </div>
+                        <div ng-if="msg.action==='review'" class="msgsys">
+                                <p ng-if="msg.type==='message'">{{msg.message}}
+                                    <button style="display:block;" class="btn btn-action" ng-click="review(roomDataG)" translate="CHAT.ST-REVIEW"></button>
+                                </p>
+                                <img ng-if="msg.type==='image'" ng-src="{{msg.message}}">
+                            </div>
+                        <div ng-if="msg.action==='handOver'" class="msg">
+                            <p ng-if="msg.type==='message'">{{msg.message}}
+                                <button style="display:block;" class="btn btn-action" ng-click="viewOfferPrice(roomDataG)" translate="CHAT.V-OfferAndAccpt"></button>
+                            </p>
+                            <img ng-if="msg.type==='image'" ng-src="{{msg.message}}">
+                        </div>
+                        <div ng-if="msg.action===null" class="msg">
+                            <p ng-if="msg.type==='message'">{{msg.message}}</p>
+                            <p ng-if="msg.type===null">{{msg.message}}</p>
+                            <img ng-if="msg.type==='image'" ng-src="{{msg.message}}">
+                        </div>
+                    </li>
+                    <li ng-if="msg.user._id === userId" class="self">
+                        <!-- <div class="avatar"><img ng-src="{{msg.user.imgUrl}}" draggable="false"></div> -->
+                        <div ng-if="msg.action==='system'" class="msgsys">
+                            <p ng-if="msg.type==='message'">{{msg.message}}</p>
+                            <img ng-if="msg.type==='image'" ng-src="{{msg.message}}">
+                        </div>
+                        <div ng-if="msg.action==='quotation'" class="msg">
+                            <p ng-if="msg.type==='message'">{{msg.user.imgUrl}}
+                                <button style="display:block;" class="btn btn-action" ng-click="viewOfferPrice(roomDataG)" translate="CHAT.V-Offer"></button>
+                            </p>
+                            <img ng-if="msg.type==='image'" ng-src="{{msg.message}}">
+                        </div>
+                        <div ng-if="msg.action==='handOver'" class="msg">
+                            <p ng-if="msg.type==='message'">{{msg.message}}
+                                <button style="display:block;" class="btn btn-action" ng-click="viewOfferPrice(roomDataG)" translate="CHAT.V-Detial"></button>
+                            </p>
+                            <img ng-if="msg.type==='image'" ng-src="{{msg.message}}">
+                        </div>
+                        <div ng-if="msg.action===null" class="msg">
+                            <p ng-if="msg.type==='message'">{{msg.message}}</p>
+                            <p ng-if="msg.type===null">{{msg.message}}</p>
+                            <img ng-if="msg.type==='image'" ng-src="{{msg.message}}">
+                        </div>
+                    </li>
+                </div>
+            </ol>
+        </div>
+        <div ng-if="roomnotfound" class="col-xs-3 col-sm-3 col-md-3 col-lg-3 chat-right-body">
+            <div class="chat-title-right-ask"><h3><img src="assets/img/Group.png">&nbsp;</h3></div>
+            <div class="chat-right-des">
+                
+            </div>
+        </div>
+        <div ng-if="Stateroom===1" class="col-xs-3 col-sm-3 col-md-3 col-lg-3 chat-right-body">
+            <div class="chat-title-right-ask"><h3 translate="CHAT.ST-ASK"></h3></div>
+            <div class="chat-right-des">
+                <p>
+                    {{Statemsg[lang]}}
+                </p>
+                <button ng-if="btnOffPrice" ng-click="OfferPrice(roomDataG)" class="btn btn-action-full" translate="CHAT.ST-OFFER"></button>
+            </div>
+        </div>
+        <div ng-if="Stateroom===2" class="col-xs-3 col-sm-3 col-md-3 col-lg-3 chat-right-body">
+            <div class="chat-title-right-w8paid"><h3  translate="CHAT.R-WAIT"></h3></div>
+            <div class="chat-right-des">
+                    <p>
+                        {{Statemsg[lang]}}
+                    </p>
+                <button ng-if="btnOffPrice" ng-click="updateQT(roomDataG)" class="btn btn-action-full" translate="CHAT.BTN-EditQ"></button>
+                <button ng-if="!btnOffPrice" ng-click="viewOfferPrice(roomDataG)" class="btn btn-action-full" translate="CHAT.V-Offer"></button>
+            </div>
+        </div>
+        <div ng-if="Stateroom===3" class="col-xs-3 col-sm-3 col-md-3 col-lg-3 chat-right-body">
+            <div class="chat-title-right-green"><h3  translate="CHAT.R-WORK"></h3></div>
+            <div class="chat-right-des">
+                    <p>
+                        {{Statemsg[lang]}}
+                    </p>
+                <button ng-if="btnOffPrice" ng-click="sendJob(roomDataG)" class="btn btn-action-full" translate="CHAT.BTN-SendWork"></button>
+                <!-- <button ng-if="btnOffPrice" ng-click="updateQT(roomDataG)" class="btn btn-action-full">แก้ไขงาน</button> -->
+                <button ng-if="!btnOffPrice" ng-click="viewOfferPrice(roomDataG)" class="btn btn-action-full" disabled translate="CHAT.BTN-Accpt"></button>
+            </div>
+        </div>
+        <div ng-if="Stateroom===4" class="col-xs-3 col-sm-3 col-md-3 col-lg-3 chat-right-body">
+            <div class="chat-title-right-green"><h3  translate="CHAT.R-WORK"></h3></div>
+            <div class="chat-right-des">
+                    <p>
+                        {{Statemsg[lang]}}
+                    </p>
+                <button ng-if="btnOffPrice" ng-click="updateQT(roomDataG)" class="btn btn-action-full" disabled translate="CHAT.BTN-SendWork"></button>
+                <button ng-if="!btnOffPrice" ng-click="acceptJob(roomDataG)" class="btn btn-action-full" translate="CHAT.BTN-Accpt"></button>
+            </div>
+        </div>
+        <div ng-if="Stateroom===5" class="col-xs-3 col-sm-3 col-md-3 col-lg-3 chat-right-body">
+            <div class="chat-title-right-green"><h3 translate="CHAT.R-REVIEW"></h3></div>
+            <div class="chat-right-des">
+                    <p>
+                        {{Statemsg[lang]}}
+                    </p>
+                <button ng-if="btnOffPrice" ng-click="updateQT(roomDataG)" class="btn btn-action-full-green" translate="CHAT.BTN-SUCCESS"></button>
+                <button ng-if="!btnOffPrice" ng-click="review(roomDataG)" class="btn btn-action-full-green" translate="CHAT.ST-REVIEW"></button>
+            </div>
+        </div>
+        <div ng-if="Stateroom===6" class="col-xs-3 col-sm-3 col-md-3 col-lg-3 chat-right-body">
+            <div class="chat-title-right-green"><h3   translate="CHAT.R-SUCCESS"></h3></div>
+            <div class="chat-right-des">
+                    <p>
+                        {{Statemsg[lang]}}
+                    </p>
+                <button ng-if="btnOffPrice" class="btn btn-action-full" translate="CHAT.BTN-SUCCESS"></button>
+                <button ng-if="!btnOffPrice" ng-click="hireAgain(roomDataG)" class="btn btn-action-full-green" translate="CHAT.BTN-HireAgain"></button>
+            </div>
+        </div>
+        <div class="col-sm-offset-4 col-md-offset-4 col-lg-offset-4 col-sm-5 col-md-5 col-lg-5 chat-msg-body-input">
+            <!-- <textarea id="inputMsg" my-enter="chatPushMsg()" ng-model="msgsend" class="chatinput" row="10" cols="100%" placeholder="แจ้งรายละเอียดงานที่ต้องการ"></textarea>
+            <div class="image-upload">
+            <label for="file-input">
+                <img src="assets/img/chatfile.png" style="pointer-events: none"/>
+            </label>
+            <input id="file-input" type="file" onchange="angular.element(this).scope().ChatupFile(this.files)" >
+            </div>      -->
+            <div class="input-group">
+                <input type="text" my-enter="chatPushMsg()" ng-model="msgsend" name="inputMessage" id="inputMsg" placeholder="Type Message ..." class="form-control">
+                <span class="input-group-btn">
+                    <button type="button" class="btn background-color-super-red color-white  btn-flat" ng-click="chatPushMsg()">Send</button>
+                </span>
+                <span class="input-group-btn">
+                    <button type="button" class="btn background-color-super-red color-white btn-flat" ng-click="clickChatupFile()">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </button>
+                    <input onchange="angular.element(this).scope().ChatupFile(this.files)" class="hide inputImageFile" data-num="1" type="file" name="img_url1" id="inputUploadFile" file-model="image.imgUrl">
+                </span>
+            </div>
+        </div>
+    </div>
+     
+   </div>
+         
+   <script type="text/ng-template" id="offerPriceModal.html">
+    <div class="modal-header modal-regis-header"  translate="MODAL.OFFER-TITLE">
+        <span ng-click="closeMD()">X</span>
+    </div>
+    <div class="modal-body" id="modal-body">
+        <div class="form-group form-g-login-modal">
+            <form ng-submit="creQT()" name="expertsCreate" autocomplete="off">
+            <div class="row form-group">
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                    <label translate="MODAL.POSTWORK-NAME"></label>
+                </div>
+                <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                    <input ng-model="workname" type="text" placeholder="ชื่อโพสงาน และ รายละเอียดเบื้องต้น" class="form-control input-size-box" required>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                    <label  translate="MTR.PRICE"></label>
+                </div>
+                <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                    <input ng-model="workprice" class="form-control jobsex-price input-size-box" type="number" placeholder="3000" required>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                    <label  translate="MTR.JOBUNIT"></label>
+                </div>
+                <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                    <div class="type-radio-jobsex" ng-init="workjobunit='hour'">
+                        <input type="radio" name="optradio" ng-model="workjobunit" value="hour" id="radio1"><label for="radio1" translate="MTR.JOBUNIT-H"></label>
+                        <input type="radio" name="optradio" ng-model="workjobunit" value="day" id="radio2"><label for="radio2" translate="MTR.JOBUNIT-D"></label>
+                        <input type="radio" name="optradio" ng-model="workjobunit" value="job" id="radio3"><label for="radio3" translate="MTR.JOBUNIT-J"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                    <label  translate="MTR.DETAIL">รายละเอียด</label>
+                </div>
+                <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                    <textarea ng-model="workdes" style="resize:none;"rows="4" cols="40" required></textarea>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-xs-offset-3 col-sm-offset-3 col-md-offset-3 col-lg-offset-3 col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                   <button type="submit" class="btn-action-jobexpress btn" style="width:100%;"  translate="MTR.BTN-OFFER"></button>
+                </div>
+            </div>
+            </form>
+        </div>
+</script>
+<script type="text/ng-template" id="updateQT.html">
+    <div class="modal-header modal-regis-header" translate="MTR.BTN-OFFER">
+        <span ng-click="closeMD()">X</span>
+    </div>
+    <div class="modal-body" id="modal-body">
+        <div class="form-group form-g-login-modal">
+            <form ng-submit="updateQT()" name="expertsCreate" autocomplete="off">
+            <div class="row form-group">
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                    <label translate="MTR.WORKNAME"></label>
+                </div>
+                <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                    <input ng-model="qtData.name[lang]" type="text" placeholder="ชื่อโพสงาน และ รายละเอียดเบื้องต้น" class="form-control input-size-box" required>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                    <label  translate="MTR.PRICE"></label>
+                </div>
+                <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                    <input ng-model="qtData.price" class="form-control jobsex-price input-size-box" type="number" placeholder="3000" required>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                    <label  translate="MTR.JOBUNIT"></label>
+                </div>
+                <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                    <div class="type-radio-jobsex" ng-init="workjobunit='hour'">
+                        <input type="radio" name="optradio" ng-model="qtData.priceType" value="hour" id="radio1"><label for="radio1" translate="MTR.JOBUNIT-H"></label>
+                        <input type="radio" name="optradio" ng-model="qtData.priceType" value="day" id="radio2"><label for="radio2" translate="MTR.JOBUNIT-D"></label>
+                        <input type="radio" name="optradio" ng-model="qtData.priceType" value="job" id="radio3"><label for="radio3" translate="MTR.JOBUNIT-J"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                    <label>รายละเอียด</label>
+                </div>
+                <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                    <textarea ng-model="qtData.detail[lang]" style="resize:none;"rows="4" cols="40" required></textarea>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-xs-offset-3 col-sm-offset-3 col-md-offset-3 col-lg-offset-3 col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                   <button type="submit" class="btn-action-jobexpress btn" style="width:100%;" translate="CHAT.BTN-EditQ"></button>
+                </div>
+            </div>
+            </form>
+        </div>
+</script>
+<script type="text/ng-template" id="viewOfferPriceModal.html">
+    <div class="modal-header modal-regis-header"  translate="CHAT.Q-OFFER">
+        <span ng-click="closeMD()">X</span>
+    </div>
+    <div class="title-vqt">
+        <label>{{vQT.name[lang]}}</label>
+    </div>
+    <div class="body-vqt" id="modal-body">
+        <div style="margin-bottom:50px;"><p>{{vQT.detail[lang]}}</p></div>
+        <div class="price-vqt">
+            <h2>ราคา<span><div class="crrc">฿</div> {{vQT.price}}</span></h2>
+            <p>{{vQT.priceType}}</p>
+        </div>
+        <button ng-if="!btnOffPrice && !btnpaid" style="margin-top:30px;font-size:22px;" ng-click="paid()" class="btn btn-action-full" translate="CHAT.BTN-PAID"></button>
+        <button ng-if="btnpaid && !btnOffPrice" style="margin-top:30px;font-size:22px;" ng-click="paid()" class="btn btn-action-full" translate="CHAT.BTN-PAID" disabled></button>
+        <button ng-if="btnOffPrice" style="margin-top:30px;font-size:22px;" ng-click="updateQT()" class="btn btn-action-full" translate="CHAT.BTN-EditQ"></button>
+         
+    </div>
+</script>
+<script type="text/ng-template" id="paidModal.html">
+    <div class="modal-header modal-regis-header" translate="CHAT.PAID">
+        <span ng-click="closeMD()">X</span>
+    </div>
+    <div class="body-vqt" id="modal-body">
+        <div class="row form-group">
+            <div class="col-sm-6 col-md-6 col-lg-6">
+                <label>{{vQT.name[lang]}}</label>
+            </div>
+            <div class="col-sm-6 col-md-6 col-lg-6">
+                <label style="float:right;">{{vQT.price}}</label>
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-sm-6 col-md-6 col-lg-6">
+                <label translate="CHAT.COUPON"></label>
+            </div>
+            <div class="col-sm-6 col-md-6 col-lg-6">
+                <input onchange="angular.element(this).scope().checkCode()" ng-model="codepro" type="text" placeholder="CODE" class="form-control input-size-box">
+                <label ng-if="rsCode">{{rsCode.name[lang]}}</label>
+            </div>
+        </div>
+    </div>
+    <div class="title-vqt">
+        <div class="row form-group">
+            <div class="col-sm-6 col-md-6 col-lg-6">
+                <label  translate="CHAT.AMOUNT"></label>
+            </div>
+            <div class="col-sm-6 col-md-6 col-lg-6">
+                <label style="float:right;"><div class="crrc">฿</div>{{rsdisc}}</label>
+            </div>
+        </div>
+    </div>
+    <div class="body-vqt" id="modal-body">
+        <div class="row form-group">
+            <center>
+            <h1 translate="CHAT.CHOOSE-BANKWAY"></h1>
+            <div class="type-radio-jobsex" >
+                     
+                <input type="radio" name="optradio" ng-model="paidtype" value="credit" id="radio1" class="ng-pristine ng-untouched ng-valid ng-not-empty" aria-invalid="false"><label for="radio1" translate="CHAT.CREDIT"></label>
+                <input type="radio" name="optradio" ng-model="paidtype" value="moneytran" id="radio2" class="ng-pristine ng-untouched ng-valid ng-not-empty" aria-invalid="false"><label for="radio2"translate="CHAT.BANK"></label>
+            </div>
+            <label class="msg-form-err" ng-if="notpaid" translate="CHAT.ASK-CHOOSE-BANK-WAY"></label>
+            <button style="margin-top:30px;font-size:22px;" ng-click="checkpaid(rsdisc)" class="btn btn-action-full" translate="CHAT.PAID"></button>
+            </center>
+        </div>
+    </div>
+</script> 
+ 
+ 
+ 
+ 
+<script type="text/ng-template" id="omisepaid.html">
+<div class="modal-header modal-regis-header" translate="CHAT.OMISE-TITLE">
+    <span ng-click="closeMD()">X</span>
+</div>
+<div class="body-vqt" id="modal-body" style="text-align: center;">
+<form id="checkout-form" class="checkout-form" ng-submit="omiseCon()" method="POST" style="width: 80%;">
+     
+    <div class="form-group">
+        <label translate="CHAT.OMISE-CardNo"></label>
+        <input type="text" data-name="cardNumber" class="form-control" placeholder="••••••••••••••••" maxlength="16" />
+    </div>
+ 
+    <div class="form-group">
+        <label translate="CHAT.OMISE-CardName"></label>
+        <input type="text" data-name="nameOnCard" class="form-control" placeholder="Full Name" />
+    </div>
+ 
+    <div class="form-group">
+        <label translate="CHAT.OMISE-EXPI"></label>
+        <div class="row">
+        <div class="col-xs-6">
+            <select class="form-control" data-name="expiryMonth">
+            <option value="">MM</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+            </select>
+        </div>
+        <div class="col-xs-6">
+            <select class="form-control" data-name="expiryYear">
+            <option value="">YYYY</option>
+            <option value="2017">2017</option>
+            <option value="2018">2018</option>
+            <option value="2019">2019</option>
+            <option value="2020">2020</option>
+            <option value="2021">2021</option>
+            <option value="2022">2022</option>
+            <option value="2023">2023</option>
+            <option value="2024">2024</option>
+            <option value="2025">2025</option>
+            </select>
+        </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label translate="CHAT.OMISE-SECUR"></label>
+        <input type="text" data-name="securityCode" class="form-control" placeholder="123" />
+    </div>
+    <center>
+        <span class="msg-form-err" ng-if="ckerr">{{errmsg}}</span>
+    </center>
+    <div class="form-group">
+        <button class="btn btn-action" translate="CHAT.OMISE-CHECKOUT"></button>
+    </div>
+ 
+    <input type="hidden" name="omiseToken" />
+    </form>
+</div>
+</script>
+<script type="text/ng-template" id="checkpaidModal.html">
+    <div class="modal-header modal-regis-header" translate="CHAT.MONTRAN-TITLE">
+        <span ng-click="closeMD()">X</span>
+    </div>
+    <div class="title-vqt">
+        <div class="row form-group">
+            <div class="col-sm-6 col-md-6 col-lg-6">
+                <label>{{vQT.name[lang]}}</label>
+            </div>
+            <div class="col-sm-6 col-md-6 col-lg-6">
+                <label style="float:right;"><div class="crrc">฿</div>{{vQT.price}}</label>
+            </div>
+        </div>
+    </div>
+    <div class="body-vqt" id="modal-body">
+        <div class="row form-group">
+            <center>
+            <h1 translate="CHAT.MONTRAN-DES-TITLE"></h1>
+            </center>
+        </div>
+        <div class="row form-group bank-wrap">
+            <div class="col-sm-4 col-md-4 col-lg-4">
+                <img src="assets/img/bank.png">
+            </div>
+            <div class="col-sm-8 col-md-8 col-lg-8" style="text-align:left;padding-top: 10px;">
+                <p translate="CHAT.MONTRAN-DES-PARA1"></p>
+                <p translate="CHAT.MONTRAN-DES-PARA2"></p>
+                <p translate="CHAT.MONTRAN-DES-PARA3"></p>
+            </div>
+        </div>
+        <div class="row form-group bank-wrap">
+            <div class="input-slip">
+                <span class="btn btn-slip">
+                    <input type="file" onchange="angular.element(this).scope().uploadSlip(this.files)">
+                    <p class="txt-slip" translate="CHAT.MONTRAN-UP-SLIP"></p>
+                </span>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-12" ng-repeat="slip in slipArray track by $index | limitTo: 5">
+                <img class="center-cropped" ng-src="{{slip}}" alt="">
+                <a class="rm-pic-expt-cre" ng-click="removeSlip($index)"><img src="assets/img/delete.png"></a>
+            </div>
+        </div>
+        <center>
+            <span class="msg-form-err" ng-if="err===true">{{errmsg}}</span>
+        </center>
+        <button style="margin-top:30px;font-size:22px;" ng-click="confirmPurchase()" class="btn btn-action-full" translate="CHAT.MONTRAN-CON-PAID"></button>
+    </div>
+</script>
+<script type="text/ng-template" id="review.html">
+    <div class="modal-header modal-regis-header" translate="MTR.REVIEW">
+        <span ng-click="closeMD()">X</span>
+    </div>
+    <div class="modal-body" id="modal-body">
+        <div class="form-group" style="min-height:400px;">
+                <div style="padding-bottom:20px;border-bottom:1px solid #F4F4F4;"class="col-sm-12 col-md-12 col-lg-12">
+                    <div class="col-sm-3 col-md-3 col-lg-3">
+                        <img class="thmnail-himsg"  ng-src="{{workerpic}}">
+                    </div>
+                    <div class="col-sm-9 col-md-9 col-lg-9">
+                        <h2 style="display:inline-block;"class="name-review">{{workername}}</h2>
+                    </div>
+                     
+                    <div class="col-offset-xs-6 col-offset-sm-6 col-offset-md-6 col-offset-lg-6 col-sm-9 col-md-9 col-lg-9">
+                        <!-- <h2 style="display:inline-block;color:#6f6f6fd5;" class="name-review">{{exptdata.tag.name[lang]}}</h2> -->
+                        <div class="acidjs-rating-stars">
+                            <form>
+                                <input type="radio" ng-model="rating" name="group-2" id="group-2-0" value="5" /><label for="group-2-0"></label>
+                                <input type="radio" ng-model="rating" name="group-2" id="group-2-1" value="4" /><label for="group-2-1"></label>
+                                <input type="radio" ng-model="rating" checked="checked" name="group-2" id="group-2-2" value="3" /><label for="group-2-2"></label>
+                                <input type="radio" ng-model="rating" name="group-2" id="group-2-3" value="2" /><label for="group-2-3"></label>
+                                <input type="radio" ng-model="rating" name="group-2" id="group-2-4"  value="1" /><label for="group-2-4"></label>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                 
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <textarea id="inputMsg" ng-model="msgsend" class="chatinputsayhi" row="20" cols="100%" placeholder="เล่าประสบการณ์กับผู้ใช้นี้" required></textarea>
+                </div>
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <button style="width:100%;"class="btn btn-action" ng-click="sendReview()" type="submit" translate="MTR.BTN-REVIEW"></button>
+                </div>
+        </div>
+    </div>
+</script>
+<script type="text/ng-template" id="่jobspostModal.html">
+    <div class="modal-header modal-jobspost-header" translate="MODAL.POSTWORK-TITLE">
+        <span ng-click="closeMD()">X</span>
+    </div>
+    <div class="modal-body" id="modal-body">
+        <form ng-submit="submitPostJob()" name="postJobForm" autocomplete="off">
+            <div class="row form-group">
+                <div class="col-sm-3 col-md-3 col-lg-3">
+                    <label translate="MODAL.POSTWORK-NAME"></label>
+                </div>
+                <div class="col-sm-9 col-md-9 col-lg-9">
+                    <input ng-model="postjob.name" type="text" placeholder="ชื่อโพสงาน และ รายละเอียดเบื้องต้น" class="form-control input-size-box" required>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-3 col-md-3 col-lg-3">
+                    <label translate="MTR.WORKTYPE"></label>
+                </div>
+                <div class="col-sm-5 col-md-5 col-lg-5">
+                    <select 
+                        ng-change="selectjob()"
+                        class="form-control input-size-box"
+                        ng-model="datajob"
+                        ng-options="data as data.name[lang] for data in jobTypes track by data._id" required>
+                        <option value="" disabled translate="MTR.TYPESELECT"></option>
+                    </select>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4">
+                    <select 
+                        class="form-control input-size-box"
+                        ng-model="datatag"
+                        ng-options="data as data.name[lang] for data in tags track by data._id" required>
+                        <option value="" disabled translate="MTR.LANGSELECT"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-3 col-md-3 col-lg-3">
+                    <label translate="MTR.PRICE"></label>
+                </div>
+                <div class="col-sm-9 col-md-9 col-lg-9">
+                    <input ng-model="postjob.price" class="form-control jobsex-price input-size-box" type="text" placeholder="3000" required>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-3 col-md-3 col-lg-3">
+                    <label translate="MTR.JOBUNIT"></label>
+                </div>
+                <div class="col-sm-9 col-md-9 col-lg-9">
+                    <div class="type-radio-jobsex" ng-init="postjob.jobunit='ต่อชั่วโมง'">
+                        <input type="radio" name="optradio" ng-model="postjob.jobunit" value="ต่อชั่วโมง" id="radio1"><label for="radio1" translate="MTR.JOBUNIT-H"></label>
+                        <input type="radio" name="optradio" ng-model="postjob.jobunit" value="ต่อวัน" id="radio2"><label for="radio2" translate="MTR.JOBUNIT-D"></label>
+                        <input type="radio" name="optradio" ng-model="postjob.jobunit" value="ต่องาน" id="radio3"><label for="radio3" translate="MTR.JOBUNIT-J"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-3 col-md-3 col-lg-3">
+                    <label translate="MTR.DETAIL"></label>
+                </div>
+                <div class="col-sm-9 col-md-9 col-lg-9">
+                    <textarea ng-model="postjob.des" style="resize:none;"rows="4" cols="40" required></textarea>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-3 col-md-3 col-lg-3">
+                    <label translate="MTR.CONTACT"></label>
+                </div>
+                <div class="col-sm-5 col-md-5 col-lg-5">
+                    <input ng-model="postjob.tel" ng-pattern="/^[0-9]{10,10}$/" class="form-control jobsex-tel input-size-box" type="text" placeholder="เบอร์โทร" required ng-minlength="10">
+                    <label></label><span class="msg-form-err" ng-show="regisForm.$dirty && regisForm.tel.$invalid">This is a required field</span>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4">
+                    <input ng-model="postjob.line" class="form-control jobsex-line input-size-box" type="text" placeholder="Line ID">
+                </div>
+            </div>
+            <div class="row form-group">
+                <span class="msg-form-err" ng-if="err===true">{{errmsg}}</span>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-3 col-md-3 col-lg-3">
+                    <label></label>
+                </div>
+                <div class="col-sm-9 col-md-9 col-lg-9">
+                    <button class="btn-action-jobspost btn" type="submit" style="width:100%;" ng-disabled="postJobForm.$invalid" translate="MTR.BTN-POSTWORK"></button>
+                </div>
+            </div>
+        </form>
+    </div>
+</script>
+</section>

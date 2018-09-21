@@ -1,0 +1,332 @@
+<div ng-if="loaded===true">
+<aside ng-show="!isLoggedIn" data-ng-include="'/modules/topbars/views/topbar.html'"></aside> 
+<aside ng-show="isLoggedIn" data-ng-include="'/modules/topbars/views/topbar4.html'"></aside>
+</div>  
+
+<section  class="margin-for-topbar-main " id="top">
+    <center>
+        <div class="crop-img-banner">
+        <div ng-if="loaded===true">
+        <jk-carousel
+            data="bannersarr"
+            item-template-url="'/modules/homes/views/item-template.html'"
+            max-width="1920" 
+            max-height="600"
+            auto-slide="true"
+            auto-slide-time="5000">
+             
+        </jk-carousel>
+        </div>
+        </div>
+    </center>
+    <div class="section-box container-fluid" ng-repeat="ex in jobTypesRow">
+        <div class="col-lg-12" id="jobrow">
+            <slick 
+            infinite=true 
+            slides-to-show="10" 
+            slides-to-scroll="1">
+                <div class="slick-item col-sm-5 col-md-4 col-lg-2" ng-repeat="data in jobTypes">
+                    <a ng-href="/#/jobtype-experts{{data._id}}">
+                        <!-- <div class="wrap">  
+                            <figure class="tint">
+                                <img style="width:100%" ng-src="{{data.imgExpertUrl}}">
+                            </figure>  
+                        </div> -->
+                        <img style="width:100%" ng-src="{{data.imgExpertUrl}}">
+                        <p class="textcover-img">{{data.name[lang]}}</p>
+                        <p class="textcover-img"></p>
+                    </a>
+                </div>
+            </slick>
+        </div>
+    </div>
+    <div class="section-box container-fluid" ng-if="loaded===true" ng-repeat="ex in experts">
+        <div class="col-lg-12">
+                <!-- col-sm-5ths col-md-5ths col-lg-5ths -->
+            <a ng-href="/#/jobtype-experts{{ex.jobType._id}}">
+                <h1 class="head-section-margin">{{ex.jobType.name[lang]}}
+            </a>        
+            <span class="see-all-wrap float-r"><a ng-href="/#/experts{{ex.jobType._id}}" class="btn btn-more" translate="MTR.SEEALL"></a></span></h1>
+           
+            <slick 
+            infinite=true 
+            slides-to-show="5" 
+            slides-to-scroll="1">
+                <div class="slick-item col-sm-5 col-md-4 col-lg-2" ng-repeat="data in ex.experts">
+                    <div  class="amPmCheckbox"  ng-click="favExpt(data._id, data.isFavorite)" >
+                        <input type="checkbox" class="checkboxLabel main_street_input" id="{{data._id}}" value="1" ng-checked="data.isFavorite"/>
+                        <label for="{{data._id}}"></label>
+                    </div>
+                    <a ng-href="/#/experts-detail{{data._id}}">
+                        <div class="crop-slide-img">
+                        <img class="slide-slick" ng-src="{{data.profileImg[0].url}}">
+                        </div>
+                        <p class="experts-name">{{data.name[lang]}}</p>
+                        <span class="experts-tag">{{data.tag.name[lang]}}</span>
+                        <div class="experts-rating" ng-if="data.rating===0">
+                            <img src="assets/img/rating.png">
+                            <img src="assets/img/rating.png">
+                            <img src="assets/img/rating.png">
+                            <img src="assets/img/rating.png">
+                            <img src="assets/img/rating.png">
+                        </div>
+                        <div class="experts-rating" ng-if="data.rating===1">
+                            <img src="assets/img/rating-active.png">
+                            <img src="assets/img/rating.png">
+                            <img src="assets/img/rating.png">
+                            <img src="assets/img/rating.png">
+                            <img src="assets/img/rating.png">
+                        </div>
+                        <div class="experts-rating" ng-if="data.rating===2">
+                            <img src="assets/img/rating-active.png">
+                            <img src="assets/img/rating-active.png">
+                            <img src="assets/img/rating.png">
+                            <img src="assets/img/rating.png">
+                            <img src="assets/img/rating.png">
+                        </div>
+                        <div class="experts-rating" ng-if="data.rating===3">
+                            <img src="assets/img/rating-active.png">
+                            <img src="assets/img/rating-active.png">
+                            <img src="assets/img/rating-active.png">
+                            <img src="assets/img/rating.png">
+                            <img src="assets/img/rating.png">
+                        </div>
+                        <div class="experts-rating" ng-if="data.rating===4">
+                            <img src="assets/img/rating-active.png">
+                            <img src="assets/img/rating-active.png">
+                            <img src="assets/img/rating-active.png">
+                            <img src="assets/img/rating-active.png">
+                            <img src="assets/img/rating.png">
+                        </div>
+                        <div class="experts-rating" ng-if="data.rating===5">
+                            <img src="assets/img/rating-active.png">
+                            <img src="assets/img/rating-active.png">
+                            <img src="assets/img/rating-active.png">
+                            <img src="assets/img/rating-active.png">
+                            <img src="assets/img/rating-active.png">
+                        </div>
+                        <p><img style="display:inline;"src="assets/img/location.png">{{data.location | getDistance}} km {{data.location.name}}</p>
+                    </a>
+                </div>
+            </slick>
+
+            <!-- <div class="col-sm-5 col-md-4 col-lg-2" ng-repeat="data in ex.experts | limitTo: 5">
+                <div  class="amPmCheckbox"  ng-click="favExpt(data._id, data.isFavorite)" >
+                    <input type="checkbox" class="checkboxLabel main_street_input" id="{{data._id}}" value="1" ng-checked="data.isFavorite"/>
+                    <label for="{{data._id}}"></label>
+                </div>
+                <a ng-href="/#/experts-detail{{data._id}}">
+                    <img style="width:100%" height="278px" ng-src="{{data.profileImg[0].url}}">
+                    <p class="experts-name">{{data.name[lang]}}</p>
+                    <span class="experts-tag">{{data.tag.name[lang]}}</span>
+                    <div class="experts-rating" ng-if="data.rating===0">
+                        <img src="assets/img/rating.png">
+                        <img src="assets/img/rating.png">
+                        <img src="assets/img/rating.png">
+                        <img src="assets/img/rating.png">
+                        <img src="assets/img/rating.png">
+                    </div>
+                    <div class="experts-rating" ng-if="data.rating===1">
+                        <img src="assets/img/rating-active.png">
+                        <img src="assets/img/rating.png">
+                        <img src="assets/img/rating.png">
+                        <img src="assets/img/rating.png">
+                        <img src="assets/img/rating.png">
+                    </div>
+                    <div class="experts-rating" ng-if="data.rating===2">
+                        <img src="assets/img/rating-active.png">
+                        <img src="assets/img/rating-active.png">
+                        <img src="assets/img/rating.png">
+                        <img src="assets/img/rating.png">
+                        <img src="assets/img/rating.png">
+                    </div>
+                    <div class="experts-rating" ng-if="data.rating===3">
+                        <img src="assets/img/rating-active.png">
+                        <img src="assets/img/rating-active.png">
+                        <img src="assets/img/rating-active.png">
+                        <img src="assets/img/rating.png">
+                        <img src="assets/img/rating.png">
+                    </div>
+                    <div class="experts-rating" ng-if="data.rating===4">
+                        <img src="assets/img/rating-active.png">
+                        <img src="assets/img/rating-active.png">
+                        <img src="assets/img/rating-active.png">
+                        <img src="assets/img/rating-active.png">
+                        <img src="assets/img/rating.png">
+                    </div>
+                    <div class="experts-rating" ng-if="data.rating===5">
+                        <img src="assets/img/rating-active.png">
+                        <img src="assets/img/rating-active.png">
+                        <img src="assets/img/rating-active.png">
+                        <img src="assets/img/rating-active.png">
+                        <img src="assets/img/rating-active.png">
+                    </div>
+                    <p><img src="assets/img/location.png">{{data.location | getDistance}} km {{data.location.name}}</p>
+                </a>
+            </div> -->
+        </div>
+    </div>
+        
+    <!-- <div class="section-box container-fluid home-section-job-wrapper">
+        <h1 class="head-section-jobs">Jobs<span class="float-r-jobs"><a href="/#/jobs" class="btn btn-more">ดูทั้งหมด ></a></span></h1>
+        <div class="col-sm-3 col-md-3 col-lg-3 "> 
+            <div class="col-sm-6 col-md-6 col-lg-5 job-tumbnail-repeat-col" ng-repeat="data in jobTypes">
+                <img style="width:100%;margin-bottom:10px" ng-src="{{data.imgJobUrl}}">
+                <p class="textcover-img-job-home">{{data.name[lang]}}</p>
+            </div>
+        </div>
+        <div class="col-sm-9 col-md-9 col-lg-9" style="padding-left:0px;"> 
+            <div class="col-sm-6 col-md-6 col-lg-6 job-post-repeat-col" ng-repeat="data in jobs" style="padding-left:0px;">
+                <div class="job-post-wrapper" ng-click="jobsModal(data)">
+                    <div class="col-sm-9 col-md-9 col-lg-9">
+                        {{data.name[lang]}}&nbsp;
+                        <div  class="status-new" ng-if="data.status=='NEW'"><span>{{data.status}}</span></div>
+                        <div  class="status-prog" ng-if="data.status=='IN PROGRESS'"><span>{{data.status}}</span></div>
+                    </div>
+                    <div class="col-sm-3 col-md-3 col-lg-3">
+                        <p class="job-price">
+                        <span class="currency-ssn">$</span>
+                        {{data.price}}
+                        </p>
+                        <p class="job-unit">
+                        {{data.priceType}}
+                        </p>     
+                    </div>
+                    <div class="col-sm-7 col-md-7 col-lg-7">
+                        <button class="btn tag-category">{{data.jobType.name[lang]}}</button>
+                        <button class="btn tag-category">{{data.tag.name[lang]}}</button>
+                    </div>
+                    <div class="col-sm-5 col-md-5 col-lg-5" style="text-align:right;">
+                        <p class="job-name">{{data.user.firstName}} {{data.user.lastName}}</p>
+                        <img class="jobs-tumbnail-poster" ng-src="{{data.user.imgUrl}}">  
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <!-- <div class="section-box  container-fluid">
+        <div class="col-lg-12">
+            <h1 class="head-section-margin">ออนไลน์คอร์ส<span class="see-all-wrap float-r"><a href="http://www.senseino.com/show_course.php" target="_blank" class="btn btn-more">ดูทั้งหมด ></a></span></h1> -->
+            <!-- <div class="col-sm-5ths col-md-5ths col-lg-5ths" ng-repeat="data in course | limitTo: 10">
+                <div class="wrapper-coursebox">
+                    <img style="width:100%" ng-src="{{data.img}}">
+                    <div class="coursebox-body">
+                        <h1>{{data.topic}}</h1>
+                        <h2>{{data.descript}}</h2>
+                        <p>{{data.amount}} / {{data.full}}</p>
+                        <center>
+                        <p><span class="course-price">&#3647;{{data.price}}</span><span class="course-gen">รุ่นที่{{data.gen}}</span><img class="course-pic" src="{{data.pic}}" alt=""></p>
+                        </center>  
+                    </div>  
+                </div>
+            </div> -->
+            <!-- <div class="iframe-wrapper">
+                <iframe class="home-iframe" src="http://www.senseino.com/show_course.php" scrolling="no"></iframe>
+            </div> -->
+        <!-- </div>
+    </div> -->
+    <!-- <div class="section-box  container-fluid">
+        <div class="col-lg-12">
+            <center>
+                <h1>ลูกค้าของเรา</h1>
+                <div class="col-sm-5ths col-md-5ths col-lg-5ths" ng-repeat="data in testimonials | limitTo: 10">
+                    <img src="{{data.img}}" class="testimonials-img">
+                </div>
+            </center>
+        </div>
+    </div> -->
+    <div class="section-box wrapper-customer  container-fluid">
+        <div class="overlay-red row  container-fluid"></div>
+        <h1 translate="FORYOU.CTM-FORORG"></h1>
+        <p translate="FORYOU.CTM-PARA1"></p>
+        <p translate="FORYOU.CTM-PARA2"></p>
+        <button class="btn-action btn" translate="MTR.BTN-SeeDetail"></button>
+        <button class="btn backtotop" ng-click="backtotop()"><span class="glyphicon glyphicon-menu-up"></span></button>
+    </div>
+    <div class="section-contact section-box container-fluid">
+        <div class="col-sm-4 col-md-4 col-lg-4">
+            <div class="col-sm-offset-2 col-md-offset-2 col-lg-offset-2 col-sm-2 col-md-2 col-lg-2">
+                <img src="assets/img/call.png" alt="">
+            </div>
+            <div class="col-sm-6 col-md-6 col-lg-6">
+                <h3 style="margin-top:0px;">Senseino Center</h3>
+                <h1 style="margin-top:0px;">092-4460222</h1>
+            </div>
+        </div>
+        <div class="col-sm-4 col-md-4 col-lg-4">
+            <div class="col-sm-offset-2 col-md-offset-2 col-sm-2 col-md-2 col-lg-2">
+                <img src="assets/img/support.png" alt="">
+            </div>
+            <div class="col-sm-6 col-md-6 col-lg-6">
+                <h1 style="margin-top:15px;" translate="FORYOU.HelpService"></h1>
+            </div>
+        </div>
+        <div class="col-sm-4 col-md-4 col-lg-4">
+            <center>
+            <div class="col-sm-offset-1 col-md-offset-2 col-sm-3 col-md-2 col-lg-2">
+                <img width="50px" src="assets/img/line.png" alt="">
+            </div>
+            <div class="col-sm-6 col-md-6 col-lg-6">
+                <h1 style="margin-top:15px;">@SENSEINO</h1>
+            </div>
+            </center>
+        </div>
+    </div>
+
+<script type="text/ng-template" id="jobModalHome.html">
+    <div class="modal-header job-modal-header" translate="MODAL.JOB-TITLE">
+        <span ng-click="closeMD()">X</span>
+    </div>
+    <div class="modal-body job-modal-body" id="modal-body">
+        <div class="job-topic-cover row">
+            <div class="col-sm-9 col-md-9 col-lg-9">
+                {{jobdatas.name[lang]}}&nbsp;
+                <div class="status-new" ng-if="jobdatas.status=='NEW'"><span>{{jobdatas.status}}</span></div>
+                <div class="status-prog" ng-if="jobdatas.status=='IN PROGRESS'"><span>{{jobdatas.status}}</span></div>
+            </div>
+            <div class="col-sm-3 col-md-3 col-lg-3">
+                <p class="job-price">
+                <span class="currency-ssn">฿</span>
+                {{jobdatas.price}}
+                </p>
+                <p class="job-unit">
+                {{jobdatas.priceType}}
+                </p>     
+            </div>
+            <div class="col-sm-6 col-md-6 col-lg-6">
+                <button class="btn tag-category">{{jobdatas.jobType.name[lang]}}</button>
+                <button class="btn tag-category">{{jobdatas.tag.name[lang]}}</button>
+            </div>
+            <div class="col-sm-6 col-md-6 col-lg-6" style="text-align:right;">
+                <p class="job-name">{{jobdatas.user.firstName}} {{jobdatas.user.lastName}}</p>
+                <img class="jobs-tumbnail-poster" ng-src="{{jobdatas.user.imgUrl}}">  
+            </div>
+        </div>
+        <div class="job-detail-cover row">
+            <h2 translate="MODAL.JOB-Detail"></h2> 
+            <p>{{jobdatas.detail[lang]}}
+            </p>
+        </div>
+    </div>
+    <div class="modal-footer job-modal-footer">
+        <button class="btn dialog-action btn-action" type="button" ng-click="chatToEmployer(jobdatas)" translate="MODAL.JOB-BTN-Offer"></button>
+    </div>
+</script>
+<script type="text/ng-template" id="lineLoginModal.html">
+    <div class="modal-header modal-regis-header" translate="MODAL.Line-TITLE">
+        <span ng-click="closeMD()">X</span>
+    </div>
+    <div class="modal-body modal-regis-body" id="modal-body">
+    <form ng-submit="regisLine()" name="regisForm" autocomplete="off" style="margin-bottom:20px;">
+        <div class="form-group form-g-login-modal">
+            <input type="email" name="email"  ng-model="email" placeholder="อีเมล" class="form-control login-ip-email" required>
+        </div>
+        <div class="form-group form-g-login-modal" ng-if="loginerr===true">
+            <span class="msg-form-err" >{{loginerrmsg}}</span>
+        </div> 
+        <button class="btn btn-action-login" type="submit" translate="MTR.BTN-Login"></button>
+    </form>
+    </div>
+</script>
+</section>
+<aside data-ng-include="'/modules/footers/views/footer.html'"></aside> 

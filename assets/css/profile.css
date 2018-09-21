@@ -1,0 +1,67 @@
+.profile-top-wrap{
+    background-color: #17B89A;
+    text-align: center;
+    padding: 30px;
+}
+.profile-top-wrap >h2 {
+    color: #fff;
+    font-size: 18px;
+}
+.profile-top-wrap >p {
+    color: #fff;
+    font-size: 16px;
+}
+.profile-crop {
+    border: 2px solid #149e82;
+    margin: 0 auto;
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+}
+.profile-crop > img{
+    max-width: 150px;
+}
+.form-g-setting > label {
+    float: left;
+    margin-left: 30px;
+}
+.form-g-setting > input{
+    height: 50px;
+    border-radius: 4px;
+    max-width: 250px;
+    margin-left: 220px;
+}
+.section-shadow{
+    padding: 15px;
+    box-shadow: 0px 1px 5px #888888;
+}
+.edit-post{
+    display: inline-block;
+    margin-left: 10px;
+}
+.edit-post:visited, .edit-post:focus, .edit-post:hover{
+    outline: none;
+}
+.put-media-wrap{
+    margin-right: 15px;
+}
+.post-crop {
+    max-width: 300px;
+    height: 300px;
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+.post-crop img.post-img-pre {
+    object-fit: cover;
+    object-position: center;
+    width: 100%;
+    height: 300px;
+    margin: 0px 0 0 0px;
+}
+.app-modal-window .modal-dialog {
+    width: 800px;
+}
+.profile-modal-edit{
+    padding: 30px;
+}

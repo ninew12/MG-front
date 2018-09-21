@@ -1,0 +1,442 @@
+<div ng-if="loaded===true">
+<aside ng-show="!isLoggedIn" data-ng-include="'/modules/topbars/views/topbar3.html'"></aside> 
+<aside ng-show="isLoggedIn" data-ng-include="'/modules/topbars/views/topbar5.html'"></aside>
+</div>  
+<section class="container-fluid" style="padding:0px;">
+<div class="section-box" style="margin-top:54px;">
+        <div class="expt-detail-title"></div>
+</div>
+            
+<div class="section-box">
+    <div class="container" style="margin-top:-180px;">
+        <div class="col-sm-7 col-md-7 col-lg-7 padding-left expt-detail-title-cover-left ">
+            <h2>{{exptdetail.name[lang]}}</h2>
+            <span class="expt-detail-title-span">{{exptdetail.tag.name[lang]}}</span>
+            <span style="letter-spacing:-5px;" ng-if="exptdetail.rating===0">
+                    <img src="assets/img/rating.png">
+                    <img src="assets/img/rating.png">
+                    <img src="assets/img/rating.png">
+                    <img src="assets/img/rating.png">
+                    <img src="assets/img/rating.png">
+            </span>
+            <span style="letter-spacing:-5px;" ng-if="exptdetail.rating===1">
+                    <img src="assets/img/rating-active.png">
+                    <img src="assets/img/rating.png">
+                    <img src="assets/img/rating.png">
+                    <img src="assets/img/rating.png">
+                    <img src="assets/img/rating.png">
+            </span>
+            <span style="letter-spacing:-5px;" ng-if="exptdetail.rating===2">
+                    <img src="assets/img/rating-active.png">
+                    <img src="assets/img/rating-active.png">
+                    <img src="assets/img/rating.png">
+                    <img src="assets/img/rating.png">
+                    <img src="assets/img/rating.png">
+            </span>
+            <span style="letter-spacing:-5px;" ng-if="exptdetail.rating===3">
+                    <img src="assets/img/rating-active.png">
+                    <img src="assets/img/rating-active.png">
+                    <img src="assets/img/rating-active.png">
+                    <img src="assets/img/rating.png">
+                    <img src="assets/img/rating.png">
+            </span>
+            <span style="letter-spacing:-5px;" ng-if="exptdetail.rating===4">
+                    <img src="assets/img/rating-active.png">
+                    <img src="assets/img/rating-active.png">
+                    <img src="assets/img/rating-active.png">
+                    <img src="assets/img/rating-active.png">
+                    <img src="assets/img/rating.png">
+            </span>
+            <span style="letter-spacing:-5px;" ng-if="exptdetail.rating===5">
+                    <img src="assets/img/rating-active.png">
+                    <img src="assets/img/rating-active.png">
+                    <img src="assets/img/rating-active.png">
+                    <img src="assets/img/rating-active.png">
+                    <img src="assets/img/rating-active.png">
+            </span>
+                
+            <p><img src="assets/img/location.png">{{exptdetail.location | getDistance}} km {{exptdetail.location.name}}</p>
+        </div>
+    </div>
+</div>
+<div class="section-box container">
+    <div class="col-sm-12 col-md-7 col-lg-7" style="padding-left:30px;margin-top:30px;">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <p class="expt-detail-des-title" translate="MTR.DETAIL"></p>
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <pre class="expt-detail-des-body">{{exptdetail.detail[lang]}}
+            </pre>
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <p class="expt-detail-des-title" translate="MTR.EXP"></p>
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <pre class="expt-detail-des-body">{{exptdetail.experience[lang]}}
+            </pre>
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <p class="expt-detail-des-title" translate="MTR.ED"></p>
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <pre class="expt-detail-des-body">{{exptdetail.education[lang]}}
+            </pre>
+        </div>
+    </div>
+    <div  style="margin-top:-120px;" class="col-sm-12 col-md-5 col-lg-5">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <div class="tab-price-overlay"><span>฿ {{exptdetail.price}}<b> {{exptdetail.priceType}}</b></span></div>
+            <div class="crop-expt-detail">
+                <!-- <img class="img-expt-detail" ng-src="{{exptdetail.profileImg[0].url}}"> -->
+                <div ng-if="loaded===true">
+                    <jk-carousel
+                    data="profilePicArr"
+                    item-template-url="'/modules/experts/views/item-template.html'"
+                    max-width="350" 
+                    max-height="400" >
+                    </jk-carousel>
+                </div>
+            </div>
+            </div>
+        <div style="margin-top:20px;" class="col-sm-12 col-md-12 col-lg-12">
+            <!-- <div  style="margin-top:-120px;" class="col-md-offset-7 col-lg-offset-7 col-sm-5 col-md-5 col-lg-5"> -->
+            <div class="expt-checboxfav" ng-click="favExpt(exptdetail._id, exptdetail.isFavorite)">
+                <input type="checkbox" class="checkboxLabel main_street_input" id="{{exptdetail._id}}" value="1" ng-checked="exptdetail.isFavorite">
+                <label for="{{exptdetail._id}}"></label>
+            </div>
+            <p class="expt-save-fav-p" >
+                Save to Favortie
+                    <button ng-click="chatExpt(exptdetail)" class="btn btn-action-chatbrief"><img src="assets/img/chat.png">
+                        แชทและบรีฟงาน
+                    </button>
+            </p>
+            
+        </div> 
+    </div>
+</div>
+            
+    
+</div>
+<div class="section-box container">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+    <h2 class="amount-review padding-left">{{exptdetail.reviews.length}} รีวิว</h2>
+    </div>
+    <div style="margin-bottom:20px;"class="col-sm-7 col-md-7 col-lg-7" ng-repeat="review in exptdetail.reviews | limitTo: 3">
+        <div style="margin-bottom:50px;"class="col-sm-12 col-md-12 col-lg-12">
+        <div class="col-sm-7 col-md-7 col-lg-7" style="margin-bottom:10px;">
+            <div class="col-sm-2 col-md-2 col-lg-2" style="padding-right:0px;">
+                <img ng-if="review.user.imgUrl"class="thmnail-review" width="100%" ng-src="{{review.user.imgUrl}}">
+                <img ng-if="!review.user.imgUrl"class="thmnail-review" width="100%" src="assets/img/Icon App.png">
+            </div>
+            <div style="padding-left:20px;" class="col-sm-9 col-md-9 col-lg-9">
+                <h2 class="name-review">{{review.user.firstName}} {{review.user.lastName}}</h2>
+            </div>
+            <div style="padding-left:20px;" class="col-offset-xs-6 col-offset-sm-6 col-offset-md-6 col-offset-lg-6 col-sm-6 col-md-6 col-lg-6">
+                    
+                <div class="experts-rating" ng-if="review.rating===0">
+                    <img src="assets/img/rating.png">
+                    <img src="assets/img/rating.png">
+                    <img src="assets/img/rating.png">
+                    <img src="assets/img/rating.png">
+                    <img src="assets/img/rating.png">
+                </div>
+                <div class="experts-rating" ng-if="review.rating===1">
+                    <img src="assets/img/rating-active.png">
+                    <img src="assets/img/rating.png">
+                    <img src="assets/img/rating.png">
+                    <img src="assets/img/rating.png">
+                    <img src="assets/img/rating.png">
+                </div>
+                <div class="experts-rating" ng-if="review.rating===2">
+                    <img src="assets/img/rating-active.png">
+                    <img src="assets/img/rating-active.png">
+                    <img src="assets/img/rating.png">
+                    <img src="assets/img/rating.png">
+                    <img src="assets/img/rating.png">
+                </div>
+                <div class="experts-rating" ng-if="review.rating===3">
+                    <img src="assets/img/rating-active.png">
+                    <img src="assets/img/rating-active.png">
+                    <img src="assets/img/rating-active.png">
+                    <img src="assets/img/rating.png">
+                    <img src="assets/img/rating.png">
+                </div>
+                <div class="experts-rating" ng-if="review.rating===4">
+                    <img src="assets/img/rating-active.png">
+                    <img src="assets/img/rating-active.png">
+                    <img src="assets/img/rating-active.png">
+                    <img src="assets/img/rating-active.png">
+                    <img src="assets/img/rating.png">
+                </div>
+                <div class="experts-rating" ng-if="review.rating===5">
+                    <img src="assets/img/rating-active.png">
+                    <img src="assets/img/rating-active.png">
+                    <img src="assets/img/rating-active.png">
+                    <img src="assets/img/rating-active.png">
+                    <img src="assets/img/rating-active.png">
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <p style="padding-left:15px;"class="">{{review.note}}</p>
+        </div>
+    </div>
+    
+</div>
+<div class="col-sm-12 col-md-12 col-lg-12">
+    <div class="col-sm-7 col-md-7 col-lg-7">
+        <button ng-if="exptdetail.reviews!=0" ng-click="seeReviewModal(exptdetail.reviews)" class="btn btn-more" translate="MTR.SeeRVAll"></button>
+    </div>
+</div>
+<div class="section-box container" ng-if="exptdetail.portfolio.length < 6">
+    <div class="col-lg-12 padding-left"  style="padding-right:90px;">
+        <h1 class="head-section-margin"  translate="EXPERT.PORT"></h1>
+        <div class="col-sm-5ths col-md-5ths col-lg-5ths" ng-repeat="data in exptdetail.portfolio">
+            <a ng-click="imgExpand(data)">
+            <div class="crop-exptde-img">
+                <img class="slide-slick" ng-src="{{data}}">
+            </div>
+            </a>
+            <!-- <p translate="EXPERT.PORT"></p> -->
+        </div>
+    </div>
+</div>
+<div class="section-box container" ng-if="exptdetail.portfolio.length > 5">
+        <div class="col-lg-12 padding-left"  style="padding-right:90px;">
+            <h1 class="head-section-margin"  translate="EXPERT.PORT"></h1>
+            <slick ng-if="loaded===true"
+                infinite=true 
+                slides-to-show="5" 
+                slides-to-scroll="1">
+                <div class="slick-item col-sm-5 col-md-4 col-lg-2" ng-repeat="data in exptdetail.portfolio">
+                    <a ng-click="imgExpand(data)">
+                        <div class="crop-exptde-img">
+                        <img class="slide-slick" ng-src="{{data}}">
+                        </div>
+                    </a>
+                </div>
+            </slick>
+    </div>
+</div>
+<div class="section-box container-fluid" ng-repeat="ex in experts">
+        <div class="col-lg-12">
+            <h1 class="head-section-margin">{{ex.jobType.name[lang]}}<span class="see-all-wrap float-r"><a ng-href="/#/experts{{ex.jobType._id}}" class="btn btn-more" translate="MTR.SEEALL"></a></span></h1>
+            <div class="col-sm-5ths col-md-5ths col-lg-5ths" ng-repeat="data in ex.experts | limitTo: 5">
+                <div class="amPmCheckbox">
+                    <input type="checkbox" class="checkboxLabel main_street_input" id="{{data._id}}" value="1" />
+                    <label for="{{data._id}}"></label>
+                </div>
+                <a href="/#/experts-detail">
+                <img style="width:100%" height="278px"ng-src="{{data.profileImg[0].url}}">
+                <p class="experts-name">{{data.name}}</p>
+                <span class="experts-tag">{{data.tag.name[lang]}}</span>
+                <div class="experts-rating" ng-if="data.rating===0">
+                    <img src="assets/img/rating.png">
+                    <img src="assets/img/rating.png">
+                    <img src="assets/img/rating.png">
+                    <img src="assets/img/rating.png">
+                    <img src="assets/img/rating.png">
+                </div>
+                <div class="experts-rating" ng-if="data.rating===1">
+                    <img src="assets/img/rating-active.png">
+                    <img src="assets/img/rating.png">
+                    <img src="assets/img/rating.png">
+                    <img src="assets/img/rating.png">
+                    <img src="assets/img/rating.png">
+                </div>
+                <div class="experts-rating" ng-if="data.rating===2">
+                    <img src="assets/img/rating-active.png">
+                    <img src="assets/img/rating-active.png">
+                    <img src="assets/img/rating.png">
+                    <img src="assets/img/rating.png">
+                    <img src="assets/img/rating.png">
+                </div>
+                <div class="experts-rating" ng-if="data.rating===3">
+                    <img src="assets/img/rating-active.png">
+                    <img src="assets/img/rating-active.png">
+                    <img src="assets/img/rating-active.png">
+                    <img src="assets/img/rating.png">
+                    <img src="assets/img/rating.png">
+                </div>
+                <div class="experts-rating" ng-if="data.rating===4">
+                    <img src="assets/img/rating-active.png">
+                    <img src="assets/img/rating-active.png">
+                    <img src="assets/img/rating-active.png">
+                    <img src="assets/img/rating-active.png">
+                    <img src="assets/img/rating.png">
+                </div>
+                <div class="experts-rating" ng-if="data.rating===5">
+                    <img src="assets/img/rating-active.png">
+                    <img src="assets/img/rating-active.png">
+                    <img src="assets/img/rating-active.png">
+                    <img src="assets/img/rating-active.png">
+                    <img src="assets/img/rating-active.png">
+                </div>
+                <p><img src="assets/img/location.png">{{data.location | getDistance}} km {{data.location.name}}</p>
+                </a>
+            </div>
+        </div>
+    </div>
+<!-- <div class="section-box row container">
+    <div class="col-lg-12">
+        <h1 class="head-section-margin">ประวัติแนะนำ<span class="see-all-wrap float-r"><button class="btn btn-more">ดูทั้งหมด ></button></span></h1>
+        <div class="col-sm-5ths col-md-5ths col-lg-5ths" ng-repeat="data in objects | limitTo: 5">
+            <div class="amPmCheckbox">
+                <input type="checkbox" class="checkboxLabel main_street_input" id="{{data.id}}" value="1" />
+                <label for="{{data.id}}"></label>
+            </div>
+            <img style="width:100%" ng-src="{{data.img}}">
+            <p>{{data.name}}</p>
+            <span>{{data.tag}}</span>
+            <p><img src="assets/img/location.png">{{data.location}}</p>
+        </div>
+    </div>
+</div> -->
+<script type="text/ng-template" id="imgfull.html">
+    <div class="modal-header modal-regis-header">
+        <span ng-click="closeMD()">X</span>
+    </div>
+    <div class="modal-body" id="modal-body">
+        <img ng-src={{imgview}}>
+    </div>
+</script>
+<script type="text/ng-template" id="seeReviewModal.html">
+    <div class="modal-header modal-regis-header">
+        {{reviews.length}} รีวิว
+        <span ng-click="closeMD()">X</span>
+    </div>
+    <div class="modal-body" id="modal-body">
+        <div class="experts-modal-body form-group">
+            <div style="margin-bottom:50px;border-bottom:1px solid #F4F4F4;"class="col-sm-12 col-md-12 col-lg-12" ng-repeat="review in reviews">
+                <div class="col-sm-12 col-md-12 col-lg-12" style="margin-bottom:10px;">
+                    <div class="col-sm-2 col-md-2 col-lg-2" style="padding:0px;">
+                        <!-- <img class="thmnail-review" width="100%" ng-src="{{review.user.imgUrl}}"> -->
+                        <img ng-if="review.user.imgUrl"class="thmnail-review" width="100%" ng-src="{{review.user.imgUrl}}">
+                        <img ng-if="!review.user.imgUrl"class="thmnail-review" width="100%" src="assets/img/Icon App.png">
+                    </div>
+                    <div class="col-sm-9 col-md-9 col-lg-9">
+                        <h2 style="margin-bottom:0px;"class="name-review">{{review.user.firstName}} {{review.user.lastName}}</h2>
+                    </div>
+                    <div class="col-offset-xs-6 col-offset-sm-6 col-offset-md-6 col-offset-lg-6 col-sm-6 col-md-6 col-lg-6">
+                        <div class="experts-rating" ng-if="review.rating===0">
+                            <img src="assets/img/rating.png">
+                            <img src="assets/img/rating.png">
+                            <img src="assets/img/rating.png">
+                            <img src="assets/img/rating.png">
+                            <img src="assets/img/rating.png">
+                        </div>
+                        <div class="experts-rating" ng-if="review.rating===1">
+                            <img src="assets/img/rating-active.png">
+                            <img src="assets/img/rating.png">
+                            <img src="assets/img/rating.png">
+                            <img src="assets/img/rating.png">
+                            <img src="assets/img/rating.png">
+                        </div>
+                        <div class="experts-rating" ng-if="review.rating===2">
+                            <img src="assets/img/rating-active.png">
+                            <img src="assets/img/rating-active.png">
+                            <img src="assets/img/rating.png">
+                            <img src="assets/img/rating.png">
+                            <img src="assets/img/rating.png">
+                        </div>
+                        <div class="experts-rating" ng-if="review.rating===3">
+                            <img src="assets/img/rating-active.png">
+                            <img src="assets/img/rating-active.png">
+                            <img src="assets/img/rating-active.png">
+                            <img src="assets/img/rating.png">
+                            <img src="assets/img/rating.png">
+                        </div>
+                        <div class="experts-rating" ng-if="review.rating===4">
+                            <img src="assets/img/rating-active.png">
+                            <img src="assets/img/rating-active.png">
+                            <img src="assets/img/rating-active.png">
+                            <img src="assets/img/rating-active.png">
+                            <img src="assets/img/rating.png">
+                        </div>
+                        <div class="experts-rating" ng-if="review.rating===5">
+                            <img src="assets/img/rating-active.png">
+                            <img src="assets/img/rating-active.png">
+                            <img src="assets/img/rating-active.png">
+                            <img src="assets/img/rating-active.png">
+                            <img src="assets/img/rating-active.png">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <p>{{review.note}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+<script type="text/ng-template" id="hiMsg.html">
+    <div class="modal-header modal-regis-header" translate="MODAL.HiM-TITLE">
+        <span ng-click="closeMD()">X</span>
+    </div>
+    <div class="modal-body" id="modal-body">
+        <div class="form-group" style="min-height:400px;">
+            <div style="padding-bottom:20px;border-bottom:1px solid #F4F4F4;"class="col-sm-12 col-md-12 col-lg-12">
+                <div class="col-sm-3 col-md-3 col-lg-3">
+                    <img class="thmnail-himsg"  ng-src="{{exptdata.thumbImgUrl}}">
+                </div>
+                <div class="col-sm-9 col-md-9 col-lg-9">
+                    <h2 style="display:inline-block;"class="name-review">{{exptdata.user.firstName}} {{exptdata.user.lastName}}</h2>
+                </div>
+                <div class="col-offset-xs-6 col-offset-sm-6 col-offset-md-6 col-offset-lg-6 col-sm-9 col-md-9 col-lg-9">
+                    <h2 style="display:inline-block;color:#6f6f6fd5;" class="name-review">{{exptdata.tag.name[lang]}}</h2>
+                    <div class="experts-rating" ng-if="exptdata.rating===0">
+                        <img src="assets/img/rating.png">
+                        <img src="assets/img/rating.png">
+                        <img src="assets/img/rating.png">
+                        <img src="assets/img/rating.png">
+                        <img src="assets/img/rating.png">
+                    </div>
+                    <div class="experts-rating" ng-if="exptdata.rating===1">
+                        <img src="assets/img/rating-active.png">
+                        <img src="assets/img/rating.png">
+                        <img src="assets/img/rating.png">
+                        <img src="assets/img/rating.png">
+                        <img src="assets/img/rating.png">
+                    </div>
+                    <div class="experts-rating" ng-if="exptdata.rating===2">
+                        <img src="assets/img/rating-active.png">
+                        <img src="assets/img/rating-active.png">
+                        <img src="assets/img/rating.png">
+                        <img src="assets/img/rating.png">
+                        <img src="assets/img/rating.png">
+                    </div>
+                    <div class="experts-rating" ng-if="exptdata.rating===3">
+                        <img src="assets/img/rating-active.png">
+                        <img src="assets/img/rating-active.png">
+                        <img src="assets/img/rating-active.png">
+                        <img src="assets/img/rating.png">
+                        <img src="assets/img/rating.png">
+                    </div>
+                    <div class="experts-rating" ng-if="exptdata.rating===4">
+                        <img src="assets/img/rating-active.png">
+                        <img src="assets/img/rating-active.png">
+                        <img src="assets/img/rating-active.png">
+                        <img src="assets/img/rating-active.png">
+                        <img src="assets/img/rating.png">
+                    </div>
+                    <div class="experts-rating" ng-if="exptdata.rating===5">
+                        <img src="assets/img/rating-active.png">
+                        <img src="assets/img/rating-active.png">
+                        <img src="assets/img/rating-active.png">
+                        <img src="assets/img/rating-active.png">
+                        <img src="assets/img/rating-active.png">
+                    </div>
+                </div>
+            </div>
+            <form ng-submit="sendMsg()" autocomplete="off">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <textarea id="inputMsg" ng-model="msgsend" class="chatinputsayhi" row="20" cols="100%" placeholder="แจ้งรายละเอียดงานที่ต้องการ" required></textarea>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <button style="width:100%;"class="btn btn-action" type="submit" translate="MTR.SendMSG"></button>
+            </div>
+            </form>
+        </div>
+    </div>
+</script>
+</section>

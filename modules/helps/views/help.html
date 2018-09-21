@@ -1,0 +1,119 @@
+<div ng-if="loaded===true">
+<aside ng-show="!isLoggedIn" data-ng-include="'/modules/topbars/views/topbar3.html'"></aside> 
+<aside ng-show="isLoggedIn" data-ng-include="'/modules/topbars/views/topbar5.html'"></aside>
+</div>  
+<section class="margin-for-topbar-2">
+    <div class="section-box container-fluid help-sec-sup">
+        <h1 translate="HELP.TITLE"></h1>
+        <input type="text" placeholder="Search by Location, Skills" my-enter="searchApiHelp()" ng-model="keywordhelp" class="searchbar-top" style="background-color:#fff;color:#484848;">
+    </div>
+    <div class="section-box row container-fluid help-sec-faq"> 
+        <div class="col-lg-12">
+        <div class="col-sm-6 col-md-6 col-lg-6">
+            <uib-accordion>  
+            <div uib-accordion-group class="panel-default" heading="{{faq.question[lang]}}" ng-repeat="faq in faqArr | limitTo: (faqArr.length/2)">
+                    {{faq.answer[lang]}}
+            </div>
+            </uib-accordion>
+        </div>
+        <div class="col-sm-6 col-md-6 col-lg-6">
+            <uib-accordion>  
+            <div uib-accordion-group class="panel-default" heading="{{faq.question[lang]}}" ng-repeat="faq in faqArr | limitTo: -(faqArr.length/2)">
+                    {{faq.answer[lang]}}
+            </div>
+            </uib-accordion>
+        </div>
+        </div>
+    </div>
+</section>
+<script type="text/ng-template" id="่jobspostModal.html">
+    <div class="modal-header modal-jobspost-header" translate="MODAL.POSTWORK-TITLE">
+        <span ng-click="closeMD()">X</span>
+    </div>
+    <div class="modal-body" id="modal-body">
+        <form ng-submit="submitPostJob()" name="postJobForm" autocomplete="off">
+            <div class="row form-group">
+                <div class="col-sm-3 col-md-3 col-lg-3">
+                    <label translate="MODAL.POSTWORK-NAME"></label>
+                </div>
+                <div class="col-sm-9 col-md-9 col-lg-9">
+                    <input ng-model="postjob.name" type="text" placeholder="ชื่อโพสงาน และ รายละเอียดเบื้องต้น" class="form-control input-size-box" required>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-3 col-md-3 col-lg-3">
+                    <label translate="MTR.WORKTYPE"></label>
+                </div>
+                <div class="col-sm-5 col-md-5 col-lg-5">
+                    <select 
+                        ng-change="selectjob()"
+                        class="form-control input-size-box"
+                        ng-model="datajob"
+                        ng-options="data as data.name[lang] for data in jobTypes track by data._id" required>
+                        <option value="" disabled translate="MTR.TYPESELECT"></option>
+                    </select>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4">
+                    <select 
+                        class="form-control input-size-box"
+                        ng-model="datatag"
+                        ng-options="data as data.name[lang] for data in tags track by data._id" required>
+                        <option value="" disabled translate="MTR.LANGSELECT"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-3 col-md-3 col-lg-3">
+                    <label translate="MTR.PRICE"></label>
+                </div>
+                <div class="col-sm-9 col-md-9 col-lg-9">
+                    <input ng-model="postjob.price" class="form-control jobsex-price input-size-box" type="text" placeholder="3000" required>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-3 col-md-3 col-lg-3">
+                    <label translate="MTR.JOBUNIT"></label>
+                </div>
+                <div class="col-sm-9 col-md-9 col-lg-9">
+                    <div class="type-radio-jobsex" ng-init="postjob.jobunit='ต่อชั่วโมง'">
+                        <input type="radio" name="optradio" ng-model="postjob.jobunit" value="ต่อชั่วโมง" id="radio1"><label for="radio1" translate="MTR.JOBUNIT-H"></label>
+                        <input type="radio" name="optradio" ng-model="postjob.jobunit" value="ต่อวัน" id="radio2"><label for="radio2" translate="MTR.JOBUNIT-D"></label>
+                        <input type="radio" name="optradio" ng-model="postjob.jobunit" value="ต่องาน" id="radio3"><label for="radio3" translate="MTR.JOBUNIT-J"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-3 col-md-3 col-lg-3">
+                    <label translate="MTR.DETAIL"></label>
+                </div>
+                <div class="col-sm-9 col-md-9 col-lg-9">
+                    <textarea ng-model="postjob.des" style="resize:none;"rows="4" cols="40" required></textarea>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-3 col-md-3 col-lg-3">
+                    <label translate="MTR.CONTACT"></label>
+                </div>
+                <div class="col-sm-5 col-md-5 col-lg-5">
+                    <input ng-model="postjob.tel" ng-pattern="/^[0-9]{10,10}$/" class="form-control jobsex-tel input-size-box" type="text" placeholder="เบอร์โทร" required ng-minlength="10">
+                    <label></label><span class="msg-form-err" ng-show="regisForm.$dirty && regisForm.tel.$invalid">This is a required field</span>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4">
+                    <input ng-model="postjob.line" class="form-control jobsex-line input-size-box" type="text" placeholder="Line ID">
+                </div>
+            </div>
+            <div class="row form-group">
+                <span class="msg-form-err" ng-if="err===true">{{errmsg}}</span>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-3 col-md-3 col-lg-3">
+                    <label></label>
+                </div>
+                <div class="col-sm-9 col-md-9 col-lg-9">
+                    <button class="btn-action-jobspost btn" type="submit" style="width:100%;" ng-disabled="postJobForm.$invalid" translate="MTR.BTN-POSTWORK"></button>
+                </div>
+            </div>
+        </form>
+    </div>
+</script>
+<aside data-ng-include="'/modules/footers/views/footer.html'"></aside> 

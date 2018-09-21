@@ -1,0 +1,14 @@
+{
+    "en": {
+        "tab_profile_setting": "settings", 
+        "tab_profile_profile": "profile",
+        "tab_profile_signout": "signout",
+        "topbar_help": "help"
+    },
+     "th": {
+        "tab_profile_setting": "ตั้งค่า", 
+        "tab_profile_profile": "โปรไฟล์",
+        "tab_profile_signout": "ลงชื่อออก",
+        "topbar_help": "ช่วยเหลือ"
+    }
+}

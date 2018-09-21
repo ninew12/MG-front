@@ -1,0 +1,85 @@
+.job-modal-header{
+    text-align: center;
+    background-color: #17B89A;
+    color: #fff;
+    font-size: 18px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    font-weight: 400;
+}
+.job-modal-header > span {
+    float: right;
+    cursor: pointer;
+}
+.job-modal-header > span:focus, .job-modal-header > span:visited, .job-modal-header > span:active{
+    outline: none;
+}
+.job-modal-body{
+    padding-top:0px;
+}
+.job-topic-cover{
+    padding: 15px 25px;
+    background-color: rgba(41, 209, 183, 0.1);   
+}
+.job-detail-cover{
+    padding: 25px;
+}
+.job-detail-cover > h2 {
+    font-size: 18px;
+    font-family: 'promptmedium';
+}
+.job-detail-cover > p {
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 200;
+    letter-spacing: 0.5px;
+}
+.modal-dialog{
+    width: 450px;
+}
+.job-modal-footer {
+    border-top: none;
+    text-align: center;
+    padding-bottom: 40px;
+}
+.job-modal-footer > button {
+    font-size: 18px;
+}
+.modal-jobspost-header {
+    text-align: center;
+    background-color: #1BD0B4;
+    color: #fff;
+    font-size: 18px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    font-weight: 400;
+}
+.modal-jobspost-header > span{
+    float: right;
+}
+.btn-action-jobspost, .btn-action-jobspost:focus, .btn-action-jobspost:visited, .btn-action-jobspost:hover {
+    background-color: #1BD0B4;
+    color: #fff;
+    box-shadow: 0 0 10px -1px #666;
+    padding: 10px 30px;
+    font-family: 'promptregular';
+    font-size: 18px;
+    outline: none!important;
+}
+.textcover-img-job{
+    word-break: break-word;
+    left: 0;
+    position: absolute;
+    text-align: center;
+    top: 40%;
+    width: 100%;
+    padding-left: 15px;
+    margin: 0 auto;
+    color: #FFF;
+    font-family: 'promptmedium';
+    font-size: 16px;
+}
+.jobs-head-section{
+    padding-left: 15px;
+    margin-bottom: 30px;
+}

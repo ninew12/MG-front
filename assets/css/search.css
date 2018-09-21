@@ -1,0 +1,12 @@
+.search-section-job-wrapper{
+    width: 100%;
+    height: unset;
+    z-index: -1;
+    padding-top: 50px;
+    padding-bottom: 50px;
+
+}
+.search-section-head{
+    font-size: 34px;
+
+}
