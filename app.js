@@ -1,9 +1,7 @@
 'use strict';
-// angular.module('myApp', ['ngRoute', 'app.routes', 'app.core', 'app.services', 'app.config']);
 angular.module('myApp', [
-    'ui.bootstrap', 'ngRoute', 'ngMaterial', 'jkAngularCarousel', 'angucomplete-alt', 'slickCarousel', 'pascalprecht.translate', 'ngCookies',
-    'myApp.auth', 'myApp.routes', 'myApp.core', 'myApp.services', 'myApp.config'])
-    // .constant('URL_API', 'http://54.255.237.25:3000')
+    'ui.bootstrap', 'ngResource', 'ngRoute', 'ngMaterial', 'jkAngularCarousel', 'angucomplete-alt', 'slickCarousel', 'pascalprecht.translate', 'ngCookies',
+    'myApp.auth', 'myApp.routes', 'myApp.core', 'myApp.services', 'myApp.config', 'ui.router', 'ui-notification'])
     .constant('URL_API', 'https://senseino.co:3000')
 
 .factory('socketio', ['$rootScope', function($rootScope){
